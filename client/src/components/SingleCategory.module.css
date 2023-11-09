@@ -1,0 +1,23 @@
+.galleryImage {
+    border-radius: 4px;
+    text-align: center;
+    display: inline-block;
+    border: solid black;
+    height: 250px;
+    width: 250px;
+    margin: 10px;
+}
+.galleryImage img {
+    height: 100%;
+    width: 100%;
+}
+.galleryImage p {
+    font-style: italic;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    margin-right: 150px;
+    position: relative;
+    bottom: 50px;
+    color: white;
+    background: rgba(0, 0, 0, 0.3);
+}
