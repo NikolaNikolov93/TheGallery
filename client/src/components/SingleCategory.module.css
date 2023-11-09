@@ -2,22 +2,32 @@
     border-radius: 4px;
     text-align: center;
     display: inline-block;
-    border: solid black;
-    height: 250px;
+    border: groove;
+    height: 200px;
     width: 250px;
     margin: 10px;
 }
+.galleryImage :hover {
+    transform: scale(1.1);
+    cursor: pointer;
+    transition: transform 0.5s ease-in-out;
+}
+& p :hover {
+    transform: scale(1.5);
+    transition: opacity 0.5s ease-in-out;
+}
 .galleryImage img {
-    height: 100%;
-    width: 100%;
+    padding-top: 5px;
+    height: 95%;
+    width: 95%;
 }
 .galleryImage p {
     font-style: italic;
     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
         "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-    margin-right: 150px;
     position: relative;
-    bottom: 50px;
+    bottom: 41px;
+    right: -8px;
+    width: fit-content;
     color: white;
-    background: rgba(0, 0, 0, 0.3);
 }

@@ -7,7 +7,6 @@ function App() {
         <>
             <Header />
             <main className="main">
-                <h1>Categories</h1>
                 <Categories />
             </main>
             <Footer />
