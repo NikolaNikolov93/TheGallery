@@ -1,18 +1,19 @@
 import styles from "./Header.module.css";
+import { Link } from "react-router-dom";
 export default function Header() {
     return (
         <header className={styles.header}>
             <nav className={styles.nav}>
                 <ul className={styles.ulStyles}>
                     <li className={styles.logoImageLiItem}>
-                        <a href="/#">
+                        <Link to="/">
                             <div className={styles.logoImage}></div>
-                        </a>
+                        </Link>
                     </li>
                     <li className={styles.liStyles}>
-                        <a className={styles.navLinks} href="#">
+                        <Link className={styles.navLinks} to="/">
                             Home
-                        </a>
+                        </Link>
                     </li>
                     <li className={styles.liStyles}>
                         <a className={styles.navLinks} href="#">
@@ -25,9 +26,9 @@ export default function Header() {
                         </a>
                     </li>
                     <li className={styles.liStyles}>
-                        <a className={styles.navLinks} href="#">
+                        <Link className={styles.navLinks} to="/register">
                             Register
-                        </a>
+                        </Link>
                     </li>
                     <li className={styles.liStyles}>
                         <a className={styles.navLinks} href="#">
