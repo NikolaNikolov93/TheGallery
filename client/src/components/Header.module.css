@@ -1,5 +1,5 @@
 .header {
-    background-image: url(../../public/images/nature1.jpg);
+    background-image: url(/images/nature1.jpg);
     background-size: cover;
     background-position: center;
     height: 400px;
@@ -61,7 +61,7 @@
     padding-top: 100px;
 }
 .logoImage {
-    background-image: url(../../public/images/TheGalleryLogo.png);
+    background-image: url(images/TheGalleryLogo.png);
     background-size: cover;
     display: flex;
     width: 131px;
