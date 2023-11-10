@@ -16,11 +16,6 @@ export default function Header() {
                     </li>
                     <li className={styles.liStyles}>
                         <a className={styles.navLinks} href="#">
-                            Gallery
-                        </a>
-                    </li>
-                    <li className={styles.liStyles}>
-                        <a className={styles.navLinks} href="#">
                             Creators
                         </a>
                     </li>
