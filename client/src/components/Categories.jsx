@@ -18,6 +18,7 @@ export default function Categories() {
             <section className={styles.categoriesContainer}>
                 {categories.map((category) => (
                     <SingleCategory
+                        key={category._id}
                         url={category.url}
                         description={category.description}
                     />

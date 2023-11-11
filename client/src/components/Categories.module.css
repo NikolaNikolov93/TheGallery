@@ -1,5 +1,8 @@
 .categoriesContainer {
+    display: flex;
+    flex-wrap: wrap;
     background-color: white;
-    padding-left: 20%;
-    padding-right: 20%;
+    gap: 30px;
+    max-width: 1190px;
+    margin: 0 auto;
 }

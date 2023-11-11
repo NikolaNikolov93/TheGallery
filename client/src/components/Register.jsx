@@ -1,12 +1,13 @@
 import styles from "./Register.module.css";
 export default function Register() {
     return (
-        <div>
+        <div className={styles.formContainer}>
             <h2>Registration Form</h2>
             <form>
-                <label>
+                <label className={styles.label}>
                     First Name:
                     <input
+                        className={styles.input}
                         type="text"
                         name="firstName"
                         value="{formData.firstName}"
@@ -14,9 +15,10 @@ export default function Register() {
                 </label>
                 <br />
 
-                <label>
+                <label className={styles.label}>
                     Last Name:
                     <input
+                        className={styles.input}
                         type="text"
                         name="lastName"
                         value="{formData.lastName}"
@@ -24,15 +26,21 @@ export default function Register() {
                 </label>
                 <br />
 
-                <label>
+                <label className={styles.label}>
                     Email:
-                    <input type="email" name="email" value="{formData.email}" />
+                    <input
+                        className={styles.input}
+                        type="email"
+                        name="email"
+                        value="{formData.email}"
+                    />
                 </label>
                 <br />
 
-                <label>
+                <label className={styles.label}>
                     Password:
                     <input
+                        className={styles.input}
                         type="password"
                         name="password"
                         value="{formData.password}"
@@ -40,7 +48,9 @@ export default function Register() {
                 </label>
                 <br />
 
-                <button type="submit">Register</button>
+                <button className={styles.submitButton} type="submit">
+                    Register
+                </button>
             </form>
         </div>
     );
