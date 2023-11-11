@@ -1,6 +1,7 @@
 .container {
     text-align: center;
     margin: 100px auto;
+    max-width: 1190px;
 }
 
 .h1NotFound {

@@ -22,9 +22,15 @@ export default function Header() {
                     </li>
                     <li className={styles.liStyles}>
                         <a className={styles.navLinks} href="#">
+                            Add Picture
+                        </a>
+                    </li>
+                    <li className={styles.liStyles}>
+                        <a className={styles.navLinks} href="#">
                             Login
                         </a>
                     </li>
+
                     <li className={styles.liStyles}>
                         <Link className={styles.navLinks} to="/register">
                             Register

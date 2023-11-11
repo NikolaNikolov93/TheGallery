@@ -1,3 +1,7 @@
 .container {
     max-width: 1190px;
+    text-align: center;
+}
+.p {
+    max-width: 1190px;
 }

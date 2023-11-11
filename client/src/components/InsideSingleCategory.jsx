@@ -21,7 +21,7 @@ export default function InsideSingleCategory() {
             /* and rovides a custom route guard to prevent making request to unexisting categories */
             return (
                 <div className={styles.container}>
-                    <h1>{`Hello to ${categoryDefinition.category}!`}</h1>
+                    <p>{`Hello to ${categoryDefinition.category}!`}</p>
                 </div>
             );
         }
