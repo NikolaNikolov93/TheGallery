@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import { Routes, Route } from "react-router-dom";
 import Register from "./components/Register";
 import InsideSingleCategory from "./components/InsideSingleCategory";
+import NotFound from "./components/NotFound";
 
 function App() {
     return (
@@ -14,9 +15,10 @@ function App() {
                     <Route path="/" element={<Categories />} />
                     <Route path="/register" element={<Register />} />
                     <Route
-                        path="/categories/:category"
+                        path="/:category"
                         element={<InsideSingleCategory />}
                     />
+                    <Route path="*" Component={NotFound} />
                 </Routes>
             </main>
             <Footer />

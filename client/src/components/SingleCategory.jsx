@@ -1,8 +1,8 @@
 import styles from "./SingleCategory.module.css";
 import { Link } from "react-router-dom";
-const baseUrl = "http://localhost:5173/categories";
+const baseUrl = "http://localhost:5173";
 
-export default function SingleCategory({ url, description, categoriesRef }) {
+export default function SingleCategory({ url, description }) {
     const hrefLink = `${baseUrl}/${description
         .toLowerCase()
         .replace(/ /g, "-")}`;

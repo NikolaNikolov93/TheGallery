@@ -1,0 +1,14 @@
+.container {
+    text-align: center;
+    margin: 100px auto;
+}
+
+.h1NotFound {
+    font-size: 3em;
+    color: #e74c3c;
+}
+
+.h1P {
+    font-size: 1.2em;
+    color: #555;
+}

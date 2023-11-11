@@ -12,18 +12,12 @@ export default function Categories() {
             .then((categories) => setCategoreis(categories))
             .catch((err) => console.log(err));
     }, []);
-
-    const categoriesRef = useRef([]);
     return (
         <>
-            {categories.map((category) =>
-                categoriesRef.current.push(category.description)
-            )}
             <DividerCategoryLine />
             <section className={styles.categoriesContainer}>
                 {categories.map((category) => (
                     <SingleCategory
-                        categoriesRef={categories}
                         key={category._id}
                         url={category.url}
                         description={category.description}
