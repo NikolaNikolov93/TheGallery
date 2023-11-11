@@ -61,7 +61,7 @@
     padding-top: 100px;
 }
 .logoImage {
-    background-image: url(images/TheGalleryLogo.png);
+    background-image: url(/images/TheGalleryLogo.png);
     background-size: cover;
     display: flex;
     width: 131px;
