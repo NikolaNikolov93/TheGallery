@@ -27,8 +27,7 @@ img {
 .galleryImage p {
     cursor: pointer;
     font-style: italic;
-    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    font-family: "Courier New", monospace;
     position: absolute;
     bottom: -7px;
     left: 16px;

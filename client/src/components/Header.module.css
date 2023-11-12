@@ -2,77 +2,53 @@
     background-image: url(/images/nature1.jpg);
     background-size: cover;
     background-position: center;
+    max-width: 1887px;
     height: 400px;
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
-    border: outset black;
 }
 
 .nav {
     background: rgba(0, 0, 0, 0.3);
-    padding: 9px;
-    margin: 1px;
-    width: auto;
-    height: 120px;
+    max-width: 1887px;
+    height: 130px;
     list-style: none;
 }
-.navLinks {
-    display: inline-block;
-    text-decoration: none;
-    width: 102px;
-    height: 45px;
-    text-align: center;
-    color: white;
-    background-color: transparent;
-    font-style: italic;
-    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-    font-size: larger;
-    height: fit-content;
-    padding-left: 25px;
-}
-.navLinks:hover {
-    text-decoration: underline;
-}
+
 .ulStyles {
+    display: flex;
     list-style-type: none;
     height: 40px;
+    padding-top: 20px;
+    gap: 50px;
 }
 .liStyles {
     display: inline-block;
     height: 0px;
-    margin: 0 10;
 }
-.container {
-    position: absolute;
-    margin: 20px;
-    width: auto;
+.navLinks {
+    text-decoration: none;
+    color: white;
+    font-family: "Courier New", monospace;
+    font-size: 25px;
+    height: fit-content;
+}
+.navLinks:hover {
+    text-decoration: underline;
 }
 .logo {
-    font-family: "Arial, Helvetica, sans-serif";
     color: white;
     font-size: 50px;
-    font-weight: bold;
     text-align: center;
-    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-    font-style: italic;
+    font-family: "Courier New", monospace;
     padding-top: 100px;
 }
 .logoImage {
     background-image: url(/images/TheGalleryLogo.png);
     background-size: cover;
-    display: flex;
-    width: 131px;
-    height: 130px;
-    border-radius: 10%;
-    overflow: hidden;
-    margin: -37px;
-    padding-right: 18px;
-}
-.logoImageLiItem {
-    display: inline-block;
-    width: 71px;
-    height: 31px;
+    width: 150px;
+    height: 150px;
+    right: 10px;
+    margin: -42px;
 }

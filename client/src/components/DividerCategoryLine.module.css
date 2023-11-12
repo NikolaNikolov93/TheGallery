@@ -1,7 +1,8 @@
 .divider {
     background-color: whitesmoke;
     font-size: x-large;
-    font-family: Georgia, "Times New Roman", Times, serif;
+    font-family: "Courier New", monospace;
+    font-weight: bold;
     max-width: 1190px;
 }
 .text {

@@ -5,7 +5,7 @@ export default function Header() {
         <header className={styles.header}>
             <nav className={styles.nav}>
                 <ul className={styles.ulStyles}>
-                    <li className={styles.logoImageLiItem}>
+                    <li className={styles.liStyles}>
                         <Link to="/">
                             <div className={styles.logoImage}></div>
                         </Link>
