@@ -13,11 +13,14 @@ export default function SingleCategory({ url, description }) {
     //     console.log("OH NO !");
     // }
     return (
-        <div className={styles.galleryImage}>
-            <Link to={hrefLink}>
-                <img className={styles.image} src={url} />
+        <Link className={styles.linkContainer} to={hrefLink}>
+            <div
+                className={styles.galleryImage}
+                style={{ backgroundImage: `url(${url})` }}
+                ata-bkg-img={url}
+            >
                 <p>{description}</p>
-            </Link>
-        </div>
+            </div>
+        </Link>
     );
 }

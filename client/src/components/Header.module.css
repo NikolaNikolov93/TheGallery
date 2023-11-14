@@ -1,54 +1,84 @@
-.header {
-    background-image: url(/images/nature1.jpg);
-    background-size: cover;
-    background-position: center;
-    max-width: 1887px;
-    height: 400px;
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+header {
     display: flex;
-    justify-content: flex-start;
     flex-direction: column;
+    height: 350px;
+    background-image: url(/images/nature3.jpg);
+    background-position: center;
+    background-size: cover;
+    color: #fff;
 }
 
-.nav {
-    background: rgba(0, 0, 0, 0.3);
-    max-width: 1887px;
-    height: 130px;
-    list-style: none;
-}
-
-.ulStyles {
+.headerInner {
     display: flex;
-    list-style-type: none;
-    height: 40px;
-    padding-top: 20px;
+    align-items: center;
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.logoWrapper {
+    width: 90px;
+    height: 90px;
+}
+
+.headerInner nav {
+    flex-grow: 1;
+}
+
+.headerInner nav ul {
+    display: flex;
     gap: 50px;
+    height: 100px;
+    align-items: center;
 }
-.liStyles {
-    display: inline-block;
-    height: 0px;
+
+.headerContent {
+    background: rgba(0, 0, 0, 0.3);
+    width: 100%;
 }
-.navLinks {
-    text-decoration: none;
-    color: white;
-    font-family: "Courier New", monospace;
-    font-size: 25px;
-    height: fit-content;
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-grow: 1;
 }
-.navLinks:hover {
-    text-decoration: underline;
+
+.container > * {
+    flex-basis: 100%;
 }
-.logo {
-    color: white;
-    font-size: 50px;
+
+.container.top {
+    background: linear-gradient(60deg, #29323c 0%, #485563 100%);
+}
+
+.content {
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
     text-align: center;
     font-family: "Courier New", monospace;
+    font-size: 100px;
     padding-top: 100px;
 }
-.logoImage {
-    background-image: url(/images/TheGalleryLogo.png);
-    background-size: cover;
-    width: 150px;
-    height: 150px;
-    right: 10px;
-    margin: -42px;
+.navLinks {
+    color: white;
+    font-family: "Courier New", monospace;
+    text-decoration: none;
+    font-size: 20px;
+}
+.userMessage {
+    font-size: 20px;
+    font-family: "Courier New", monospace;
 }

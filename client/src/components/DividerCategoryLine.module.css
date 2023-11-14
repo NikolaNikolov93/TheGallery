@@ -3,10 +3,10 @@
     font-size: x-large;
     font-family: "Courier New", monospace;
     font-weight: bold;
-    max-width: 1190px;
+    width: 100%;
 }
 .text {
     margin: 0 0 30px 0;
-    padding-left: 348px;
+    padding-left: 250px;
     max-width: 1190px;
 }
