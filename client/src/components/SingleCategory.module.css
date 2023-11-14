@@ -27,7 +27,7 @@ img {
 
 .galleryImage p {
     cursor: pointer;
-    font-size: 30px;
+    font-size: 1.5vw;
     font-style: italic;
     font-family: "Courier New", monospace;
     position: absolute;
