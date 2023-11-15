@@ -1,8 +1,8 @@
 import styles from "./Categories.module.css";
-import DividerCategoryLine from "./DividerCategoryLine";
-import SingleCategory from "./SingleCategory";
+import DividerCategoryLine from "../divider/DividerCategoryLine";
+import SingleCategory from "../single-category/SingleCategory";
 import { useEffect, useState, useRef } from "react";
-import * as categoriesServices from "../services/categoriesServices";
+import * as categoriesServices from "../../services/categoriesServices";
 
 export default function Categories() {
     const [categories, setCategoreis] = useState([]);

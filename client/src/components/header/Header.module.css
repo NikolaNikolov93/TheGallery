@@ -12,7 +12,7 @@ header {
     display: flex;
     flex-direction: column;
     height: 350px;
-    background-image: url(/images/nature3.jpg);
+    background-image: url(D:\SoftUni\React\TheGallery\client\src\assets\images\nature3.jpg);
     background-position: center;
     background-size: cover;
     color: #fff;
@@ -30,6 +30,9 @@ header {
 .logoWrapper {
     width: 90px;
     height: 90px;
+}
+.logoImg {
+    object-fit: contain;
 }
 
 .headerInner nav {

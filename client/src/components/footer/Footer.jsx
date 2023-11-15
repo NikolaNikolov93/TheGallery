@@ -5,7 +5,7 @@ export default function Footer() {
         <footer className={styles.footer}>
             <p>
                 This site is designed by Nikola Nikolov to be used for training
-                purposes at SoftUni.
+                purposes at SoftUni &copy;.
             </p>
         </footer>
     );

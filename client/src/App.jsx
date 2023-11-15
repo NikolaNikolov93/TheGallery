@@ -1,10 +1,12 @@
-import Categories from "./components/Categories";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
 import { Routes, Route } from "react-router-dom";
-import Register from "./components/Register";
-import InsideSingleCategory from "./components/InsideSingleCategory";
-import NotFound from "./components/NotFound";
+
+import Categories from "./components/categories/Categories";
+import Footer from "./components/footer/Footer";
+import Header from "./components/header/Header";
+import Register from "./components/register/Register";
+import InsideSingleCategory from "./components/inside-single-categorie/InsideSingleCategory";
+import NotFound from "./components/notFound/NotFound";
+import Login from "./components/login/Login";
 
 function App() {
     return (
@@ -14,6 +16,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Categories />} />
                     <Route path="/register" element={<Register />} />
+                    <Route path="/login" element={<Login />} />
                     <Route
                         path="/:category"
                         element={<InsideSingleCategory />}

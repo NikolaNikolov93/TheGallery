@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import styles from "./InsideSingleCategory.module.css";
-import * as categoriesServices from "../services/categoriesServices";
-import NotFound from "./NotFound";
+import * as categoriesServices from "../../services/categoriesServices";
+import NotFound from "../notFound/NotFound";
 export default function InsideSingleCategory() {
     const categoryDefinition = useParams();
     const [categories, setCategoreis] = useState([]);

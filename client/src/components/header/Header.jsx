@@ -1,6 +1,6 @@
 import styles from "./Header.module.css";
 import { Link } from "react-router-dom";
-import logo from "../../public/images/TheGalleryLogo.png";
+import logo from "../../assets/images/TheGalleryLogo.png";
 
 export default function Header() {
     return (
@@ -10,7 +10,7 @@ export default function Header() {
                 <div className={styles.headerInner}>
                     <Link to="/">
                         <div className={styles.logoWrapper}>
-                            <img src={logo} />
+                            <img className={styles.logoImg} src={logo} />
                         </div>
                     </Link>
                     <nav>

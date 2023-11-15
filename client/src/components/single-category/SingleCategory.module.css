@@ -40,6 +40,7 @@ img {
 .linkContainer {
     flex-basis: calc((100% - 90px) / 4);
     overflow: hidden;
+    box-shadow: 5px 5px 5px 5px rgb(102, 100, 100, 0.5);
 }
 
 .galleryImage {
@@ -50,13 +51,11 @@ img {
     transition: all 0.6s ease-in-out;
 }
 
-/* Tick is when we hover scale  */
 .galleryImage:hover {
     transform: scale(1.2);
     opacity: 0.8;
 }
 
-/* Tick is when we not hover scale  */
 .galleryImage:not(:hover) {
     transform: scale(1);
     opacity: 1;

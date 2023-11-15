@@ -46,6 +46,15 @@ export default function Register() {
                         value="{formData.password}"
                     />
                 </label>
+                <label className={styles.label}>
+                    Repeat Password:
+                    <input
+                        className={styles.input}
+                        type="repeatPassword"
+                        name="repeatPassword"
+                        value="{formData.password}"
+                    />
+                </label>
                 <br />
 
                 <button className={styles.submitButton} type="submit">
