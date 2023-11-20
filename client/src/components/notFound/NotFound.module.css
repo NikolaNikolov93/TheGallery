@@ -7,9 +7,11 @@
 .h1NotFound {
     font-size: 3em;
     color: #e74c3c;
+    font-family: "Raleway", sans-serif;
 }
 
 .h1P {
     font-size: 1.2em;
     color: #555;
+    font-family: "Raleway", sans-serif;
 }

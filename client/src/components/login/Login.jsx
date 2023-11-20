@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../login/Login.module.css";
-export default function Login({ close, backDropClick }) {
+export default function Login({ close }) {
     const closeOnEscapeKey = (target) => {
         if (target.code === "Escape") {
             close();
@@ -9,7 +9,8 @@ export default function Login({ close, backDropClick }) {
         return;
     };
     const closeOnBackdropClick = (event) => {
-        if (event.target.className === "_modal_2eh81_1") {
+        const backDropElement = document.getElementById("backDrop");
+        if (event.target.className === backDropElement.className) {
             close();
             return;
         }
@@ -17,7 +18,11 @@ export default function Login({ close, backDropClick }) {
     };
     return (
         <div onKeyDown={closeOnEscapeKey}>
-            <div className={styles.modal} onClick={closeOnBackdropClick}>
+            <div
+                id="backDrop"
+                className={styles.modal}
+                onClick={closeOnBackdropClick}
+            >
                 <div className={styles["modal-content"]}>
                     <span className={styles["close"]} onClick={close}>
                         &times;
@@ -26,15 +31,28 @@ export default function Login({ close, backDropClick }) {
                     <form>
                         <label>
                             Username:
-                            <input type="text" />
+                            <input
+                                placeholder="Type your username"
+                                autoFocus
+                                type="text"
+                            />
                         </label>
                         <br />
                         <label>
                             Password:
-                            <input type="password" />
+                            <input
+                                placeholder="Type your password"
+                                type="password"
+                            />
                         </label>
                         <br />
                         <button type="button">Login</button>
+                        <span className={styles["register-redirection"]}>
+                            <div>
+                                Don't have registration?{" "}
+                                <a href="/#">Register</a>
+                            </div>
+                        </span>
                     </form>
                 </div>
             </div>

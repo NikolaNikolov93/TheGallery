@@ -71,16 +71,16 @@ header {
     margin: 0 auto;
     padding: 0 20px;
     text-align: center;
-    font-family: "Courier New", monospace;
+    font-family: "Raleway", sans-serif;
     font-size: 100px;
 }
 .navLinks {
     color: white;
-    font-family: "Courier New", monospace;
+    font-family: "Raleway", sans-serif;
     text-decoration: none;
     font-size: 20px;
 }
 .userMessage {
     font-size: 20px;
-    font-family: "Courier New", monospace;
+    font-family: "Raleway", sans-serif;
 }
