@@ -1,17 +1,21 @@
 import React from "react";
 import styles from "../login/Login.module.css";
-export default function Login({ close }) {
+export default function Login({ closeLoginModal, openRegisterModal }) {
+    const relocate = () => {
+        closeLoginModal();
+        openRegisterModal();
+    };
     const closeOnEscapeKey = (target) => {
         if (target.code === "Escape") {
-            close();
+            closeLoginModal();
             return;
         }
         return;
     };
     const closeOnBackdropClick = (event) => {
-        const backDropElement = document.getElementById("backDrop");
+        const backDropElement = document.getElementById("loginBackDrop");
         if (event.target.className === backDropElement.className) {
-            close();
+            closeLoginModal();
             return;
         }
         return;
@@ -19,12 +23,12 @@ export default function Login({ close }) {
     return (
         <div onKeyDown={closeOnEscapeKey}>
             <div
-                id="backDrop"
+                id="loginBackDrop"
                 className={styles.modal}
                 onClick={closeOnBackdropClick}
             >
                 <div className={styles["modal-content"]}>
-                    <span className={styles["close"]} onClick={close}>
+                    <span className={styles["close"]} onClick={closeLoginModal}>
                         &times;
                     </span>
                     <h2>Login</h2>
@@ -50,7 +54,9 @@ export default function Login({ close }) {
                         <span className={styles["register-redirection"]}>
                             <div>
                                 Don't have registration?{" "}
-                                <a href="/#">Register</a>
+                                <a onClick={relocate} href="/#">
+                                    Register
+                                </a>
                             </div>
                         </span>
                     </form>

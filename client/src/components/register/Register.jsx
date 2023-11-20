@@ -1,66 +1,76 @@
+import React from "react";
 import styles from "./Register.module.css";
-export default function Register() {
+export default function Register({ closeRegisterModal, openLoginModal }) {
+    const relocate = () => {
+        closeRegisterModal();
+        openLoginModal();
+    };
+    const closeOnEscapeKey = (target) => {
+        if (target.code === "Escape") {
+            closeRegisterModal();
+            return;
+        }
+        return;
+    };
+    const closeOnBackdropClick = (event) => {
+        const backDropElement = document.getElementById("registerBackDrop");
+        if (event.target.className === backDropElement.className) {
+            closeRegisterModal();
+            return;
+        }
+        return;
+    };
     return (
-        <div className={styles.formContainer}>
-            <h2>Registration Form</h2>
-            <form>
-                <label className={styles.label}>
-                    First Name:
+        <div
+            onClick={closeOnBackdropClick}
+            onKeyDown={closeOnEscapeKey}
+            id="registerBackDrop"
+            className={styles["modal"]}
+        >
+            <div className={styles["modal-content"]}>
+                <span className={styles["close"]} onClick={closeRegisterModal}>
+                    &times;
+                </span>
+                <h2>Register</h2>
+                <form>
+                    <label htmlFor="username">Username:</label>
                     <input
-                        className={styles.input}
+                        autoFocus
                         type="text"
-                        name="firstName"
-                        value="{formData.firstName}"
+                        id="username"
+                        name="username"
+                        required
                     />
-                </label>
-                <br />
 
-                <label className={styles.label}>
-                    Last Name:
-                    <input
-                        className={styles.input}
-                        type="text"
-                        name="lastName"
-                        value="{formData.lastName}"
-                    />
-                </label>
-                <br />
+                    <label htmlFor="email">Email:</label>
+                    <input type="email" id="email" name="email" required />
 
-                <label className={styles.label}>
-                    Email:
+                    <label htmlFor="password">Password:</label>
                     <input
-                        className={styles.input}
-                        type="email"
-                        name="email"
-                        value="{formData.email}"
-                    />
-                </label>
-                <br />
-
-                <label className={styles.label}>
-                    Password:
-                    <input
-                        className={styles.input}
                         type="password"
+                        id="password"
                         name="password"
-                        value="{formData.password}"
+                        required
                     />
-                </label>
-                <label className={styles.label}>
-                    Repeat Password:
+                    <label htmlFor="repeat-password">Repeat password:</label>
                     <input
-                        className={styles.input}
-                        type="repeatPassword"
-                        name="repeatPassword"
-                        value="{formData.password}"
+                        type="repeat-password"
+                        id="repeat-password"
+                        name="repeat-password"
+                        required
                     />
-                </label>
-                <br />
 
-                <button className={styles.submitButton} type="submit">
-                    Register
-                </button>
-            </form>
+                    <button type="submit">Register</button>
+                    <span className={styles["login-redirection"]}>
+                        <div>
+                            Already have registration?{" "}
+                            <a onClick={relocate} href="/#">
+                                Login
+                            </a>
+                        </div>
+                    </span>
+                </form>
+            </div>
         </div>
     );
 }

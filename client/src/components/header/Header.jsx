@@ -3,13 +3,27 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/images/TheGalleryLogo.png";
 import React, { useState } from "react";
 import Login from "../login/Login";
+import Register from "../register/Register";
 
 export default function Header() {
     const [showLogin, setShowLogin] = useState(false);
+    const [showRegister, setShowRegister] = useState(false);
 
     return (
         <>
-            {showLogin && <Login close={() => setShowLogin(false)} />}
+            {showLogin && (
+                <Login
+                    closeLoginModal={() => setShowLogin(false)}
+                    openRegisterModal={() => setShowRegister(true)}
+                />
+            )}
+            {showRegister && (
+                <Register
+                    closeRegisterModal={() => setShowRegister(false)}
+                    openLoginModal={() => setShowLogin(true)}
+                />
+            )}
+
             <header>
                 <div className={styles.headerContent}>
                     <div className={styles.headerInner}>
@@ -53,7 +67,8 @@ export default function Header() {
                                 <li>
                                     <Link
                                         className={styles.navLinks}
-                                        to="/register"
+                                        onClick={() => setShowRegister(true)}
+                                        to="/#"
                                     >
                                         Register
                                     </Link>
@@ -70,7 +85,7 @@ export default function Header() {
                         </nav>
                         <div className={styles.userMessage}>
                             <span>Welcome, </span>
-                            <Link className={styles.navLinks} to="/register">
+                            <Link className={styles.navLinks} to="/#">
                                 user!
                             </Link>
                         </div>
