@@ -6,7 +6,6 @@ import Header from "./components/header/Header";
 import Register from "./components/register/Register";
 import InsideSingleCategory from "./components/inside-single-categorie/InsideSingleCategory";
 import NotFound from "./components/notFound/NotFound";
-import Login from "./components/login/Login";
 
 function App() {
     return (
@@ -16,7 +15,6 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Categories />} />
                     <Route path="/register" element={<Register />} />
-                    <Route path="/login" element={<Login />} />
                     <Route
                         path="/:category"
                         element={<InsideSingleCategory />}
