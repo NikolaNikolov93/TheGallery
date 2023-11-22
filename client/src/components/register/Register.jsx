@@ -36,6 +36,7 @@ export default function Register({ closeRegisterModal, openLoginModal }) {
                     <label htmlFor="username">Username:</label>
                     <input
                         autoFocus
+                        placeholder="Type your username"
                         type="text"
                         id="username"
                         name="username"
@@ -43,10 +44,17 @@ export default function Register({ closeRegisterModal, openLoginModal }) {
                     />
 
                     <label htmlFor="email">Email:</label>
-                    <input type="email" id="email" name="email" required />
+                    <input
+                        placeholder="Type your email"
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                    />
 
                     <label htmlFor="password">Password:</label>
                     <input
+                        placeholder="Type your password"
                         type="password"
                         id="password"
                         name="password"
@@ -54,6 +62,7 @@ export default function Register({ closeRegisterModal, openLoginModal }) {
                     />
                     <label htmlFor="repeat-password">Repeat password:</label>
                     <input
+                        placeholder="Repeat password"
                         type="repeat-password"
                         id="repeat-password"
                         name="repeat-password"
