@@ -4,6 +4,7 @@ import styles from "./InsideSingleCategory.module.css";
 import * as categoriesServices from "../../services/categoriesServices";
 import * as pictureServices from "../../services/pictureServices";
 import NotFound from "../notFound/NotFound";
+import PictureWrapper from "../pictureWrapper/PicutreWrapper";
 export default function InsideSingleCategory() {
     /* Setup for custom route guard */
     const categoryDefinition = useParams();
@@ -38,7 +39,11 @@ export default function InsideSingleCategory() {
                 <div className={styles.container}>
                     {filteredPictures.length > 0 ? (
                         filteredPictures.map((picture) => (
-                            <p key={picture._id}>{picture.description}</p>
+                            <PictureWrapper
+                                key={picture._id}
+                                description={picture.description}
+                                url={picture.url}
+                            />
                         ))
                     ) : (
                         <p>There are no pictures yet!</p>

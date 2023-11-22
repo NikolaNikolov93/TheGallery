@@ -1,7 +1,9 @@
 .container {
-    max-width: 1190px;
-    text-align: center;
-}
-.p {
-    max-width: 1190px;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1440px;
+    gap: 20px;
+    padding: 0 20px;
+    max-width: 1440px;
+    margin: 0 auto;
 }
