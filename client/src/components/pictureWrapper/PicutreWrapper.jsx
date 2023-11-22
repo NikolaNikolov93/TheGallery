@@ -6,8 +6,11 @@ export default function PictureWrapper({ url, description }) {
                 className={styles.img}
                 style={{ backgroundImage: `url(${url})` }}
             >
-                <p>{description}</p>
+                <p className={styles.headline}>{description}</p>
             </div>
+            <button className={styles.button}>Like</button>
+            <button className={styles.button}>Edit</button>
+            <button className={styles.button}>Delete</button>
         </div>
     );
 }
