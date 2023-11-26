@@ -18,7 +18,7 @@ export default function InsideSingleCategory() {
     let mappedCategories = categories.map((category) =>
         category.description.toLowerCase().replace(" ", "-")
     );
-    /** filters the pictures by category */
+
     const [pictures, setPictures] = useState([]);
     useEffect(() => {
         pictureServices
@@ -26,6 +26,7 @@ export default function InsideSingleCategory() {
             .then((pictures) => setPictures(pictures))
             .catch((err) => console.log(err));
     }, []);
+    /** filters the pictures by category */
     let filteredPictures = pictures.filter(
         (picture) =>
             picture.category ===

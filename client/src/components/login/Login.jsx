@@ -1,6 +1,11 @@
+import useForm from "../../hooks/useFrom";
 import React from "react";
 import styles from "../login/Login.module.css";
 export default function Login({ closeLoginModal, openRegisterModal }) {
+    const { values, onChange, onSubmit } = useForm({
+        username: "",
+        password: "",
+    });
     const relocate = () => {
         closeLoginModal();
         openRegisterModal();
@@ -32,13 +37,17 @@ export default function Login({ closeLoginModal, openRegisterModal }) {
                         &times;
                     </span>
                     <h2>Login</h2>
-                    <form>
+                    <form onSubmit={onSubmit}>
                         <label>
                             Username:
                             <input
                                 placeholder="Type your username"
                                 autoFocus
                                 type="text"
+                                id="username"
+                                name="username"
+                                onChange={onChange}
+                                value={values.username}
                             />
                         </label>
                         <br />
@@ -47,10 +56,14 @@ export default function Login({ closeLoginModal, openRegisterModal }) {
                             <input
                                 placeholder="Type your password"
                                 type="password"
+                                id="password"
+                                name="password"
+                                onChange={onChange}
+                                value={values.password}
                             />
                         </label>
                         <br />
-                        <button type="button" className={styles.loginButton}>
+                        <button type="submit" className={styles.loginButton}>
                             Login
                         </button>
                         <span className={styles["register-redirection"]}>
