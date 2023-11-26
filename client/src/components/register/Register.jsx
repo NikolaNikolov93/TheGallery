@@ -69,7 +69,9 @@ export default function Register({ closeRegisterModal, openLoginModal }) {
                         required
                     />
 
-                    <button type="submit">Register</button>
+                    <button type="submit" className={styles.registerButton}>
+                        Register
+                    </button>
                     <span className={styles["login-redirection"]}>
                         <div>
                             Already have registration?{" "}

@@ -50,7 +50,9 @@ export default function Login({ closeLoginModal, openRegisterModal }) {
                             />
                         </label>
                         <br />
-                        <button type="button">Login</button>
+                        <button type="button" className={styles.loginButton}>
+                            Login
+                        </button>
                         <span className={styles["register-redirection"]}>
                             <div>
                                 Don't have registration?{" "}

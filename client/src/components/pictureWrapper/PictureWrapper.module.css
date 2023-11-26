@@ -13,6 +13,13 @@
     height: 85%;
     width: 100%;
 }
+.detailsButton {
+    top: 100px;
+    display: none;
+    height: 60px;
+    width: 80px;
+    position: relative;
+}
 .headline {
     cursor: pointer;
     font-size: 1.3vw;
@@ -21,19 +28,39 @@
     position: relative;
     bottom: -263px;
 }
-.button {
-    display: none;
-    cursor: pointer;
-    font-size: 0.9vw;
-    font-family: "Raleway", sans-serif;
-    color: rgb(0, 0, 0);
-    position: relative;
-    bottom: -2px;
-    margin-right: 5px;
+.likeButtonLiked {
+    background-color: red;
 }
-.wrapper:hover .button {
-    display: inline;
+.buttonsWrapper {
+    display: none;
+}
+.buttonsWrapper button {
+    border-radius: 10%;
+    margin-left: 10px;
+    top: 7px;
+    position: relative;
+    height: 30px;
+    width: 60px;
+    font-family: "Raleway", sans-serif;
+}
+.likesCounter {
+    top: 10px;
+    position: relative;
+    display: inline-flex;
+    float: right;
+    font-size: larger;
+    font-family: "Raleway", sans-serif;
+}
+
+.wrapper:hover .buttonsWrapper {
+    display: inline-flex;
+    float: inline-start;
+    gap: 10px;
 }
 .wrapper:hover .headline {
     display: none;
+}
+
+.wrapper:hover .detailsButton {
+    display: inline;
 }

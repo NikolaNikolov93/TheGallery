@@ -1,5 +1,5 @@
 .container {
-    background-color: gray;
+    background-color: rgb(185, 185, 185);
     display: flex;
     flex-wrap: wrap;
     max-width: 1440px;
