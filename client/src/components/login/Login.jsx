@@ -1,10 +1,20 @@
 import useForm from "../../hooks/useFrom";
 import React from "react";
 import styles from "../login/Login.module.css";
-export default function Login({ closeLoginModal, openRegisterModal }) {
-    const { values, onChange, onSubmit } = useForm({
-        username: "",
-        password: "",
+
+const LoginFromKeys = {
+    Username: "username",
+    Password: "password",
+};
+
+export default function Login({
+    loginSubmitHandler,
+    closeLoginModal,
+    openRegisterModal,
+}) {
+    const { values, onChange, onSubmit } = useForm(loginSubmitHandler, {
+        [LoginFromKeys.Username]: "",
+        [LoginFromKeys.Password]: "",
     });
     const relocate = () => {
         closeLoginModal();
@@ -45,9 +55,9 @@ export default function Login({ closeLoginModal, openRegisterModal }) {
                                 autoFocus
                                 type="text"
                                 id="username"
-                                name="username"
+                                name={LoginFromKeys.Username}
                                 onChange={onChange}
-                                value={values.username}
+                                value={values[LoginFromKeys.Username]}
                             />
                         </label>
                         <br />
@@ -57,9 +67,9 @@ export default function Login({ closeLoginModal, openRegisterModal }) {
                                 placeholder="Type your password"
                                 type="password"
                                 id="password"
-                                name="password"
+                                name={LoginFromKeys.Password}
                                 onChange={onChange}
-                                value={values.password}
+                                value={values[LoginFromKeys.Password]}
                             />
                         </label>
                         <br />

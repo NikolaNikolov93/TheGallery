@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import Login from "../login/Login";
 import Register from "../register/Register";
 
-export default function Header() {
+export default function Header({ loginSubmitHandler }) {
     const [showLogin, setShowLogin] = useState(false);
     const [showRegister, setShowRegister] = useState(false);
 
@@ -13,6 +13,7 @@ export default function Header() {
         <>
             {showLogin && (
                 <Login
+                    loginSubmitHandler={loginSubmitHandler}
                     closeLoginModal={() => setShowLogin(false)}
                     openRegisterModal={() => setShowRegister(true)}
                 />

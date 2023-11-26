@@ -3,18 +3,21 @@ import { Routes, Route } from "react-router-dom";
 import Categories from "./components/categories/Categories";
 import Footer from "./components/footer/Footer";
 import Header from "./components/header/Header";
-import Register from "./components/register/Register";
 import InsideSingleCategory from "./components/inside-single-categorie/InsideSingleCategory";
 import NotFound from "./components/notFound/NotFound";
+import { useState } from "react";
 
 function App() {
+    const [auth, setAuth] = useState({});
+    const loginSubmitHandler = (values) => {
+        console.log(values);
+    };
     return (
         <>
-            <Header />
+            <Header loginSubmitHandler={loginSubmitHandler} />
             <main className="main">
                 <Routes>
                     <Route path="/" element={<Categories />} />
-                    <Route path="/register" element={<Register />} />
                     <Route
                         path="/:category"
                         element={<InsideSingleCategory />}
