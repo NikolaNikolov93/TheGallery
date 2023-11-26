@@ -1,6 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./Register.module.css";
-export default function Register({ closeRegisterModal, openLoginModal }) {
+import AuthContext from "../contexts/authContext";
+import useForm from "../../hooks/useFrom";
+export default function Register() {
+    const RegisterFormKeys = {
+        Email: "email",
+        Password: "password",
+        Repass: "repeat-password",
+        Username: "username",
+    };
+    const { openLoginModal, closeRegisterModal, registerSubmitHandler } =
+        useContext(AuthContext);
+    const { values, onChange, onSubmit } = useForm(registerSubmitHandler, {
+        [RegisterFormKeys.Email]: "",
+        [RegisterFormKeys.Username]: "",
+        [RegisterFormKeys.Password]: "",
+        [RegisterFormKeys.Repass]: "",
+    });
     const relocate = () => {
         closeRegisterModal();
         openLoginModal();
@@ -32,7 +48,7 @@ export default function Register({ closeRegisterModal, openLoginModal }) {
                     &times;
                 </span>
                 <h2>Register</h2>
-                <form>
+                <form onSubmit={onSubmit}>
                     <label htmlFor="username">Username:</label>
                     <input
                         autoFocus
@@ -40,7 +56,8 @@ export default function Register({ closeRegisterModal, openLoginModal }) {
                         type="text"
                         id="username"
                         name="username"
-                        required
+                        onChange={onChange}
+                        value={values[RegisterFormKeys.Username]}
                     />
 
                     <label htmlFor="email">Email:</label>
@@ -49,7 +66,8 @@ export default function Register({ closeRegisterModal, openLoginModal }) {
                         type="email"
                         id="email"
                         name="email"
-                        required
+                        onChange={onChange}
+                        value={values[RegisterFormKeys.Email]}
                     />
 
                     <label htmlFor="password">Password:</label>
@@ -58,7 +76,8 @@ export default function Register({ closeRegisterModal, openLoginModal }) {
                         type="password"
                         id="password"
                         name="password"
-                        required
+                        onChange={onChange}
+                        value={values[RegisterFormKeys.Password]}
                     />
                     <label htmlFor="repeat-password">Repeat password:</label>
                     <input
@@ -66,7 +85,8 @@ export default function Register({ closeRegisterModal, openLoginModal }) {
                         type="repeat-password"
                         id="repeat-password"
                         name="repeat-password"
-                        required
+                        onChange={onChange}
+                        value={values[RegisterFormKeys.Repass]}
                     />
 
                     <button type="submit" className={styles.registerButton}>

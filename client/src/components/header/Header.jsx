@@ -1,27 +1,35 @@
 import styles from "./Header.module.css";
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/TheGalleryLogo.png";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Login from "../login/Login";
 import Register from "../register/Register";
+import AuthContext from "../contexts/authContext";
 
-export default function Header({ loginSubmitHandler }) {
-    const [showLogin, setShowLogin] = useState(false);
-    const [showRegister, setShowRegister] = useState(false);
+export default function Header() {
+    // const [showLogin, setShowLogin] = useState(false);
+    const {
+        closeLoginModal,
+        openLoginModal,
+        showLogin,
+        closeRegisterModal,
+        openRegisterModal,
+        showRegister,
+    } = useContext(AuthContext);
+    // const [showRegister, setShowRegister] = useState(false);
 
     return (
         <>
             {showLogin && (
                 <Login
-                    loginSubmitHandler={loginSubmitHandler}
-                    closeLoginModal={() => setShowLogin(false)}
-                    openRegisterModal={() => setShowRegister(true)}
+                    closeLoginModal={closeLoginModal}
+                    openRegisterModal={openRegisterModal}
                 />
             )}
             {showRegister && (
                 <Register
-                    closeRegisterModal={() => setShowRegister(false)}
-                    openLoginModal={() => setShowLogin(true)}
+                    closeRegisterModal={closeRegisterModal}
+                    openLoginModal={openLoginModal}
                 />
             )}
 
@@ -51,7 +59,7 @@ export default function Header({ loginSubmitHandler }) {
                                 <li>
                                     <Link
                                         className={styles.navLinks}
-                                        onClick={() => setShowLogin(true)}
+                                        onClick={openLoginModal}
                                         to="/#"
                                     >
                                         Login
@@ -68,7 +76,7 @@ export default function Header({ loginSubmitHandler }) {
                                 <li>
                                     <Link
                                         className={styles.navLinks}
-                                        onClick={() => setShowRegister(true)}
+                                        onClick={openRegisterModal}
                                         to="/#"
                                     >
                                         Register

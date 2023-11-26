@@ -1,19 +1,18 @@
 import useForm from "../../hooks/useFrom";
-import React from "react";
+import React, { useContext } from "react";
 import styles from "../login/Login.module.css";
+import AuthContext from "../contexts/authContext";
 
 const LoginFromKeys = {
-    Username: "username",
+    Email: "email",
     Password: "password",
 };
 
-export default function Login({
-    loginSubmitHandler,
-    closeLoginModal,
-    openRegisterModal,
-}) {
+export default function Login() {
+    const { loginSubmitHandler, closeLoginModal, openRegisterModal } =
+        useContext(AuthContext);
     const { values, onChange, onSubmit } = useForm(loginSubmitHandler, {
-        [LoginFromKeys.Username]: "",
+        [LoginFromKeys.Email]: "",
         [LoginFromKeys.Password]: "",
     });
     const relocate = () => {
@@ -49,15 +48,15 @@ export default function Login({
                     <h2>Login</h2>
                     <form onSubmit={onSubmit}>
                         <label>
-                            Username:
+                            Email:
                             <input
-                                placeholder="Type your username"
+                                placeholder="Type your email"
                                 autoFocus
                                 type="text"
-                                id="username"
-                                name={LoginFromKeys.Username}
+                                id="email"
+                                name={LoginFromKeys.Email}
                                 onChange={onChange}
-                                value={values[LoginFromKeys.Username]}
+                                value={values[LoginFromKeys.Email]}
                             />
                         </label>
                         <br />
