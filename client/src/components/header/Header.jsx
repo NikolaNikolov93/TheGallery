@@ -19,6 +19,7 @@ export default function Header() {
         isAuthenticated,
         username,
         email,
+        token,
     } = useContext(AuthContext);
     // const [showRegister, setShowRegister] = useState(false);
 
@@ -66,7 +67,6 @@ export default function Header() {
                                             <Link
                                                 className={styles.navLinks}
                                                 onClick={openLoginModal}
-                                                to="/#"
                                             >
                                                 Login
                                             </Link>
@@ -75,7 +75,6 @@ export default function Header() {
                                             <Link
                                                 className={styles.navLinks}
                                                 onClick={openRegisterModal}
-                                                to="/#"
                                             >
                                                 Register
                                             </Link>
@@ -96,9 +95,10 @@ export default function Header() {
 
                                         <li>
                                             <Link
-                                                onClick={logoutHandler}
+                                                onClick={() =>
+                                                    logoutHandler(token)
+                                                }
                                                 className={styles.navLinks}
-                                                to="/#"
                                             >
                                                 Logout
                                             </Link>

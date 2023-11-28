@@ -13,7 +13,10 @@ function App() {
     const navigate = useNavigate();
 
     /**Authentication state */
-    const [auth, setAuth] = useState({});
+    const [auth, setAuth] = useState(() => {
+        localStorage.removeItem("accessToken");
+        return {};
+    });
 
     /** Lifted state for the Login From */
     const [showLogin, setShowLogin] = useState(false);
@@ -27,6 +30,7 @@ function App() {
     const loginSubmitHandler = async (values) => {
         const result = await authService.login(values.email, values.password);
         setAuth(result);
+        localStorage.setItem("accessToken", result.accessToken);
         navigate(Path.Home);
         closeLoginModal();
     };
@@ -45,15 +49,17 @@ function App() {
             values.password,
             values.username
         );
-        console.log(result);
         setAuth(result);
+        localStorage.setItem("accessToken", result.accessToken);
         navigate(Path.Home);
         closeRegisterModal();
     };
 
     /**Logout handler */
-    const logoutHandler = () => {
+    const logoutHandler = async (token) => {
+        await authService.logout(token);
         setAuth({});
+        localStorage.removeItem("accessToken");
         navigate(Path.Home);
     };
 
@@ -70,7 +76,8 @@ function App() {
         logoutHandler,
         username: auth.username,
         email: auth.email,
-        isAuthenticated: !!auth.email,
+        isAuthenticated: !!auth.accessToken,
+        token: auth.accessToken,
     };
 
     return (
