@@ -15,6 +15,10 @@ export default function Header() {
         closeRegisterModal,
         openRegisterModal,
         showRegister,
+        logoutHandler,
+        isAuthenticated,
+        username,
+        email,
     } = useContext(AuthContext);
     // const [showRegister, setShowRegister] = useState(false);
 
@@ -56,48 +60,63 @@ export default function Header() {
                                         Creators
                                     </Link>
                                 </li>
-                                <li>
-                                    <Link
-                                        className={styles.navLinks}
-                                        onClick={openLoginModal}
-                                        to="/#"
-                                    >
-                                        Login
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link
-                                        className={styles.navLinks}
-                                        to="/create-image"
-                                    >
-                                        Add Image
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link
-                                        className={styles.navLinks}
-                                        onClick={openRegisterModal}
-                                        to="/#"
-                                    >
-                                        Register
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link
-                                        className={styles.navLinks}
-                                        to="/logout"
-                                    >
-                                        Logout
-                                    </Link>
-                                </li>
+                                {!isAuthenticated && (
+                                    <>
+                                        <li>
+                                            <Link
+                                                className={styles.navLinks}
+                                                onClick={openLoginModal}
+                                                to="/#"
+                                            >
+                                                Login
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link
+                                                className={styles.navLinks}
+                                                onClick={openRegisterModal}
+                                                to="/#"
+                                            >
+                                                Register
+                                            </Link>
+                                        </li>
+                                    </>
+                                )}
+
+                                {isAuthenticated && (
+                                    <>
+                                        <li>
+                                            <Link
+                                                className={styles.navLinks}
+                                                to="/create-image"
+                                            >
+                                                Add Image
+                                            </Link>
+                                        </li>
+
+                                        <li>
+                                            <Link
+                                                onClick={logoutHandler}
+                                                className={styles.navLinks}
+                                                to="/#"
+                                            >
+                                                Logout
+                                            </Link>
+                                        </li>
+                                    </>
+                                )}
                             </ul>
                         </nav>
-                        <div className={styles.userMessage}>
-                            <span>Welcome, </span>
-                            <Link className={styles.navLinks} to="/#">
-                                user!
-                            </Link>
-                        </div>
+                        {isAuthenticated && (
+                            <>
+                                <div className={styles.userMessage}>
+                                    <span>Welcome, </span>
+                                    <Link className={styles.navLinks} to="/#">
+                                        {username}!
+                                    </Link>
+                                </div>
+                            </>
+                        )}
                     </div>
                 </div>
                 <section className="container top">

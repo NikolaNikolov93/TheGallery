@@ -11,8 +11,10 @@ import Path from "./paths";
 
 function App() {
     const navigate = useNavigate();
+
     /**Authentication state */
     const [auth, setAuth] = useState({});
+
     /** Lifted state for the Login From */
     const [showLogin, setShowLogin] = useState(false);
     const closeLoginModal = () => {
@@ -28,6 +30,7 @@ function App() {
         navigate(Path.Home);
         closeLoginModal();
     };
+
     /** Lifted state for the Register From */
     const [showRegister, setShowRegister] = useState(false);
     const closeRegisterModal = () => {
@@ -36,25 +39,37 @@ function App() {
     const openRegisterModal = () => {
         setShowRegister(true);
     };
-    const registerSubmitHandler = () => {
-        console.log("REGISTER!!");
+    const registerSubmitHandler = (values) => {
+        console.log(values);
         closeRegisterModal();
         navigate(Path.Home);
     };
+
+    /**Logout handler */
+    const logoutHandler = () => {
+        setAuth({});
+        navigate(Path.Home);
+    };
+
+    /**Context values object */
+    const contextData = {
+        loginSubmitHandler,
+        closeLoginModal,
+        openLoginModal,
+        showLogin,
+        closeRegisterModal,
+        openRegisterModal,
+        showRegister,
+        registerSubmitHandler,
+        logoutHandler,
+        username: auth.username,
+        email: auth.email,
+        isAuthenticated: !!auth.email,
+    };
+
     return (
         <>
-            <AuthContext.Provider
-                value={{
-                    loginSubmitHandler,
-                    closeLoginModal,
-                    openLoginModal,
-                    showLogin,
-                    closeRegisterModal,
-                    openRegisterModal,
-                    showRegister,
-                    registerSubmitHandler,
-                }}
-            >
+            <AuthContext.Provider value={contextData}>
                 <Header />
                 <main className="main">
                     <Routes>
