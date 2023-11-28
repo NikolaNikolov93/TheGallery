@@ -39,10 +39,16 @@ function App() {
     const openRegisterModal = () => {
         setShowRegister(true);
     };
-    const registerSubmitHandler = (values) => {
-        console.log(values);
-        closeRegisterModal();
+    const registerSubmitHandler = async (values) => {
+        const result = await authService.register(
+            values.email,
+            values.password,
+            values.username
+        );
+        console.log(result);
+        setAuth(result);
         navigate(Path.Home);
+        closeRegisterModal();
     };
 
     /**Logout handler */
