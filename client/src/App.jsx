@@ -5,12 +5,22 @@ import Footer from "./components/footer/Footer";
 import Header from "./components/header/Header";
 import InsideSingleCategory from "./components/inside-single-categorie/InsideSingleCategory";
 import NotFound from "./components/notFound/NotFound";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AuthContext from "./components/contexts/authContext";
 import Path from "./paths";
+import Top10 from "./components/top10/top10";
+import CreatePicture from "./components/createPicture/CreatePicture";
+import * as categoriesServices from "./services/categoriesServices";
 
 function App() {
     const navigate = useNavigate();
+    const [categories, setCategoreis] = useState([]);
+    useEffect(() => {
+        categoriesServices
+            .getAll()
+            .then((categories) => setCategoreis(categories))
+            .catch((err) => console.log(err));
+    }, []);
 
     /**Authentication state */
     const [auth, setAuth] = useState(() => {
@@ -65,6 +75,7 @@ function App() {
 
     /**Context values object */
     const contextData = {
+        categories,
         loginSubmitHandler,
         closeLoginModal,
         openLoginModal,
@@ -87,6 +98,11 @@ function App() {
                 <main className="main">
                     <Routes>
                         <Route path="/" element={<Categories />} />
+                        <Route path="/top10" element={<Top10 />} />
+                        <Route
+                            path="/create-image"
+                            element={<CreatePicture />}
+                        />
                         <Route
                             path="/:category"
                             element={<InsideSingleCategory />}

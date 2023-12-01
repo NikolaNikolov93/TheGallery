@@ -56,9 +56,9 @@ export default function Header() {
                                 <li>
                                     <Link
                                         className={styles.navLinks}
-                                        to="creators"
+                                        to="top10"
                                     >
-                                        Creators
+                                        Top 10
                                     </Link>
                                 </li>
                                 {!isAuthenticated && (

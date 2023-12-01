@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:3030/jsonstore/categories";
+const baseUrl = "http://localhost:3030/data/categories";
 
 export const getAll = async () => {
     const response = await fetch(baseUrl);
