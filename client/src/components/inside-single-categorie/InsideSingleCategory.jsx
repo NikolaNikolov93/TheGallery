@@ -1,20 +1,15 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from "./InsideSingleCategory.module.css";
-import * as categoriesServices from "../../services/categoriesServices";
 import * as pictureServices from "../../services/pictureServices";
 import NotFound from "../notFound/NotFound";
 import PictureWrapper from "../pictureWrapper/PicutreWrapper";
+import CategoriesContext from "../contexts/categoriesContext";
 export default function InsideSingleCategory() {
     /* Setup for custom route guard */
     const categoryDefinition = useParams();
-    const [categories, setCategoreis] = useState([]);
-    useEffect(() => {
-        categoriesServices
-            .getAll()
-            .then((categories) => setCategoreis(categories))
-            .catch((err) => console.log(err));
-    }, []);
+    const { categories } = useContext(CategoriesContext);
+
     let mappedCategories = categories.map((category) =>
         category.description.toLowerCase().replace(" ", "-")
     );
