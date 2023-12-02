@@ -1,34 +1,19 @@
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Categories from "./components/categories/Categories";
 import Footer from "./components/footer/Footer";
 import Header from "./components/header/Header";
 import InsideSingleCategory from "./components/inside-single-categorie/InsideSingleCategory";
 import NotFound from "./components/notFound/NotFound";
-import { useState, useEffect } from "react";
 import { AuthProvider } from "./components/contexts/authContext";
-import CategoriesContext from "./components/contexts/categoriesContext";
+import { CategoriesProvider } from "./components/contexts/categoriesContext";
 import Top10 from "./components/top10/top10";
 import CreatePicture from "./components/createPicture/CreatePicture";
-import * as categoriesServices from "./services/categoriesServices";
 
 function App() {
-    const [categories, setCategoreis] = useState([]);
-    useEffect(() => {
-        categoriesServices
-            .getAll()
-            .then((categories) => setCategoreis(categories))
-            .catch((err) => console.log(err));
-    }, []);
-
-    /**Categoreis values object  */
-    const categoriesContextData = {
-        categories,
-    };
-
     return (
         <>
             <AuthProvider>
-                <CategoriesContext.Provider value={categoriesContextData}>
+                <CategoriesProvider>
                     <Header />
                     <main className="main">
                         <Routes>
@@ -46,7 +31,7 @@ function App() {
                         </Routes>
                     </main>
                     <Footer />
-                </CategoriesContext.Provider>
+                </CategoriesProvider>
             </AuthProvider>
         </>
     );
