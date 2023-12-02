@@ -1400,6 +1400,17 @@
     			description: "FASHION",
     			_id: "d3bec382-e8f5-4061-8cdb-63ba8f2ee88c"
     		}
+    	},
+    	pictures: {
+    		"35c62d76-8152-4626-8712-eeb96381bea8": {
+    			_ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
+    			headline: "Home",
+    			description: "Nice bedroom",
+    			url: "https://hips.hearstapps.com/hmg-prod/images/interior-design-ideas-idea-9-dwell-1-1644331792.jpg",
+    			category: "HOME INTERIOR",
+    			_createdOn: 1701507842976,
+    			_id: "5eebc189-59fe-403f-acfa-e623c43124fe"
+    		}
     	}
     };
     var rules$1 = {
