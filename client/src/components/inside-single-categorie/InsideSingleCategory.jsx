@@ -30,7 +30,7 @@ export default function InsideSingleCategory() {
     /** filters the pictures by category */
     let filteredPictures = pictures.filter(
         (picture) =>
-            picture.category.toLowerCase().replace("-", " ") ===
+            picture.category?.toLowerCase().replace("-", " ") ===
             categoryDefinition.category.toLowerCase().replace("-", " ")
     );
 

@@ -7,6 +7,7 @@ import InsideSingleCategory from "./components/inside-single-categorie/InsideSin
 import NotFound from "./components/notFound/NotFound";
 import { useState, useEffect } from "react";
 import AuthContext from "./components/contexts/authContext";
+import CategoriesContext from "./components/contexts/categoriesContext";
 import Path from "./paths";
 import Top10 from "./components/top10/top10";
 import CreatePicture from "./components/createPicture/CreatePicture";
@@ -73,9 +74,8 @@ function App() {
         navigate(Path.Home);
     };
 
-    /**Context values object */
-    const contextData = {
-        categories,
+    /**Authentication values object */
+    const authenticationContextData = {
         loginSubmitHandler,
         closeLoginModal,
         openLoginModal,
@@ -90,28 +90,34 @@ function App() {
         isAuthenticated: !!auth.accessToken,
         token: auth.accessToken,
     };
+    /**Categoreis values object  */
+    const categoriesContextData = {
+        categories,
+    };
 
     return (
         <>
-            <AuthContext.Provider value={contextData}>
-                <Header />
-                <main className="main">
-                    <Routes>
-                        <Route path="/" element={<Categories />} />
-                        <Route path="/top10" element={<Top10 />} />
-                        <Route
-                            path="/create-image"
-                            element={<CreatePicture />}
-                        />
-                        <Route
-                            path="/:category"
-                            element={<InsideSingleCategory />}
-                        />
-                        <Route path="*" Component={NotFound} />
-                    </Routes>
-                </main>
-                <Footer />
-            </AuthContext.Provider>
+            <CategoriesContext.Provider value={categoriesContextData}>
+                <AuthContext.Provider value={authenticationContextData}>
+                    <Header />
+                    <main className="main">
+                        <Routes>
+                            <Route path="/" element={<Categories />} />
+                            <Route path="/top10" element={<Top10 />} />
+                            <Route
+                                path="/create-image"
+                                element={<CreatePicture />}
+                            />
+                            <Route
+                                path="/:category"
+                                element={<InsideSingleCategory />}
+                            />
+                            <Route path="*" Component={NotFound} />
+                        </Routes>
+                    </main>
+                    <Footer />
+                </AuthContext.Provider>
+            </CategoriesContext.Provider>
         </>
     );
 }

@@ -3,6 +3,7 @@ import styles from ".././createPicture/CreatePicture.module.css";
 import AuthContext from "../contexts/authContext";
 import useForm from "../../hooks/useFrom";
 import * as pictureServices from "../../services/pictureServices";
+import CategoriesContext from "../contexts/categoriesContext";
 
 export default function CreatePicture() {
     const CreatePicutreFormKeys = {
@@ -15,12 +16,11 @@ export default function CreatePicture() {
         pictureServices.create(values, token);
         console.log(values);
     };
-    const { categories, token } = useContext(AuthContext);
+    const { token } = useContext(AuthContext);
+    const { categories } = useContext(CategoriesContext);
     /**Selected option state */
     const [selectedOption, setSelectedOption] = useState("NATURE");
-    const handleOptionChange = (event) => {
-        setSelectedOption(event.target.value);
-    };
+
     /**Form Handler */
     const { values, onChange, onSubmit } = useForm(createPictureSubmitHandler, {
         [CreatePicutreFormKeys.Headline]: "",

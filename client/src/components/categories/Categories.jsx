@@ -1,12 +1,11 @@
 import styles from "./Categories.module.css";
 import DividerCategoryLine from "../divider/DividerCategoryLine";
 import SingleCategory from "../single-category/SingleCategory";
-import { useContext, useEffect, useState } from "react";
-import * as categoriesServices from "../../services/categoriesServices";
-import AuthContext from "../contexts/authContext";
+import { useContext } from "react";
+import CategoriesContext from "../contexts/categoriesContext";
 
 export default function Categories() {
-    const { categories } = useContext(AuthContext);
+    const { categories } = useContext(CategoriesContext);
     // const [categories, setCategoreis] = useState([]);
     // useEffect(() => {
     //     categoriesServices
