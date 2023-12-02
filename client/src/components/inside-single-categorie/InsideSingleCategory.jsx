@@ -26,12 +26,14 @@ export default function InsideSingleCategory() {
             .then((pictures) => setPictures(pictures))
             .catch((err) => console.log(err));
     }, []);
+
     /** filters the pictures by category */
     let filteredPictures = pictures.filter(
         (picture) =>
-            picture.category ===
+            picture.category.toLowerCase().replace("-", " ") ===
             categoryDefinition.category.toLowerCase().replace("-", " ")
     );
+
     for (const category in mappedCategories) {
         if (mappedCategories[category] === categoryDefinition.category) {
             /** checks if the URL param exist in the currently available categories */

@@ -1,15 +1,40 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import styles from ".././createPicture/CreatePicture.module.css";
 import AuthContext from "../contexts/authContext";
+import useForm from "../../hooks/useFrom";
+import * as pictureServices from "../../services/pictureServices";
 
 export default function CreatePicture() {
-    const { categories } = useContext(AuthContext);
+    const CreatePicutreFormKeys = {
+        Headline: "headline",
+        URL: "url",
+        Description: "description",
+        Category: "category",
+    };
+    const createPictureSubmitHandler = (values) => {
+        pictureServices.create(values, token);
+        console.log(values);
+    };
+    const { categories, token } = useContext(AuthContext);
+    /**Selected option state */
+    const [selectedOption, setSelectedOption] = useState("NATURE");
+    const handleOptionChange = (event) => {
+        setSelectedOption(event.target.value);
+    };
+    /**Form Handler */
+    const { values, onChange, onSubmit } = useForm(createPictureSubmitHandler, {
+        [CreatePicutreFormKeys.Headline]: "",
+        [CreatePicutreFormKeys.URL]: "",
+        [CreatePicutreFormKeys.Description]: "",
+        [CreatePicutreFormKeys.Category]: selectedOption,
+    });
+
     return (
         <>
             <div className={styles["container"]}>
                 <div className={styles["container-content"]}>
                     <h2>Add Image</h2>
-                    <form>
+                    <form onSubmit={onSubmit}>
                         <label htmlFor="headline">Headline</label>
                         <input
                             autoFocus
@@ -17,7 +42,8 @@ export default function CreatePicture() {
                             type="text"
                             id="headline"
                             name="headline"
-                            // value={values[RegisterFormKeys.Username]}
+                            onChange={onChange}
+                            value={values[CreatePicutreFormKeys.Headline]}
                         />
                         <label htmlFor="URL">URL</label>
                         <input
@@ -25,12 +51,17 @@ export default function CreatePicture() {
                             type="url"
                             id="url"
                             name="url"
-                            // value={values[RegisterFormKeys.Username]}
+                            onChange={onChange}
+                            value={values[CreatePicutreFormKeys.URL]}
                         />
 
                         <div>
                             <label>Select Category</label>
-                            <select>
+                            <select
+                                name="category"
+                                value={values[CreatePicutreFormKeys.Category]}
+                                onChange={onChange}
+                            >
                                 {categories.map((category) => (
                                     <option key={category._id}>
                                         {category.description}
@@ -38,15 +69,14 @@ export default function CreatePicture() {
                                 ))}
                             </select>
                         </div>
-                        <label htmlFor="repeat-password">
-                            Picture Description
-                        </label>
+                        <label htmlFor="description">Picture Description</label>
                         <textarea
                             placeholder="Type short picture description"
-                            type="repeat-password"
-                            id="repeat-password"
-                            name="repeat-password"
-                            // value={values[RegisterFormKeys.Repass]}
+                            type="description"
+                            id="description"
+                            name="description"
+                            onChange={onChange}
+                            value={values[CreatePicutreFormKeys.Description]}
                         />
 
                         <button
