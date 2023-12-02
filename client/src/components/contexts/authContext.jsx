@@ -2,6 +2,7 @@ import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as authService from "../../services/authService";
 import Path from "../../paths";
+import usePeristedState from "../../hooks/usePersistedState";
 
 const AuthContext = createContext();
 AuthContext.displayName = "AuthContext";
@@ -10,13 +11,13 @@ export const AuthProvider = ({ children }) => {
     const navigate = useNavigate();
 
     /**Authentication state */
-    const [auth, setAuth] = useState(() => {
-        localStorage.removeItem("accessToken");
-        return {};
-    });
+    const [auth, setAuth] = usePeristedState("auth", {});
 
     /** Lifted state for the Login From */
-    const [showLogin, setShowLogin] = useState(false);
+    const [showLogin, setShowLogin] =
+        usePeristedState(
+            false
+        ); /** usePersistedState is custom hook for persisting the state in the localStorage */
     const closeLoginModal = () => {
         setShowLogin(false);
     };
