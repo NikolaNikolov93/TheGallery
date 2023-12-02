@@ -1,6 +1,9 @@
 import styles from "../../components/pictureWrapper/PictureWrapper.module.css";
 import { useState } from "react";
-export default function PictureWrapper({ url, description }) {
+export default function PictureWrapper({ url, headline, owner, currentUser }) {
+    const isOwner = owner === currentUser;
+    const isLoggedIn = !!currentUser;
+
     const [likes, setLikes] = useState(0);
     const [isClicked, setIsClicked] = useState(false);
     const handleClick = () => {
@@ -13,25 +16,60 @@ export default function PictureWrapper({ url, description }) {
     };
 
     return (
-        <div className={styles.wrapper}>
+        <div
+            className={styles[`${isLoggedIn ? "wrapper" : "wrapperLoggedOut"}`]}
+        >
             <div
                 className={styles.img}
                 style={{ backgroundImage: `url(${url})` }}
             >
-                <button className={styles.detailsButton}>Details</button>
-                <p className={styles.headline}>{description}</p>
+                {isLoggedIn && (
+                    <>
+                        <button className={styles.detailsButton}>
+                            Details
+                        </button>
+                    </>
+                )}
+
+                <p className={styles.headline}>{headline}</p>
             </div>
-            <div className={styles.buttonsWrapper}>
-                <button
-                    onClick={() => handleClick()}
-                    className={styles[`likeButton${isClicked && "Liked"}`]}
-                >
-                    Like
-                </button>
-                <button className={styles.wrapperButton}>Edit</button>
-                <button className={styles.wrapperButton}>Delete</button>
-            </div>
-            <div className={styles.likesCounter}>{likes}</div>
+            {isLoggedIn && (
+                <>
+                    <div className={styles.buttonsWrapper}>
+                        {!isOwner && (
+                            <>
+                                {isClicked ? (
+                                    <button
+                                        onClick={() => handleClick()}
+                                        className={styles[`likeButtonLiked`]}
+                                    >
+                                        Liked
+                                    </button>
+                                ) : (
+                                    <button
+                                        onClick={() => handleClick()}
+                                        className={styles[`likeButton`]}
+                                    >
+                                        Like
+                                    </button>
+                                )}
+                            </>
+                        )}
+
+                        {isOwner && (
+                            <>
+                                <button className={styles.wrapperButton}>
+                                    Edit
+                                </button>
+                                <button className={styles.wrapperButton}>
+                                    Delete
+                                </button>
+                            </>
+                        )}
+                    </div>
+                </>
+            )}
+            <div className={styles.likesCounter}>{`Likes: ${likes}`}</div>
         </div>
     );
 }

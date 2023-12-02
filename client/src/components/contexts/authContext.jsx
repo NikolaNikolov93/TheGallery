@@ -1,7 +1,10 @@
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import * as authService from "../../services/authService";
+
 import Path from "../../paths";
+
 import usePeristedState from "../../hooks/usePersistedState";
 
 const AuthContext = createContext();
@@ -75,6 +78,7 @@ export const AuthProvider = ({ children }) => {
         username: auth.username,
         email: auth.email,
         isAuthenticated: !!auth.accessToken,
+        userId: auth._id,
         token: auth.accessToken,
     };
     return (

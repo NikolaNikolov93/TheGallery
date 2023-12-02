@@ -1,6 +1,7 @@
 import { createContext } from "react";
-import * as categoriesServices from "../../services/categoriesServices";
 import { useEffect, useState } from "react";
+
+import * as categoriesServices from "../../services/categoriesServices";
 
 const CategoriesContext = createContext();
 CategoriesContext.displayName = "CategoriesContext";
