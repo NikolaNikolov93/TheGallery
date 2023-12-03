@@ -1602,6 +1602,15 @@
                 _id: "5eebc189-59fe-403f-acfa-e623c43124fe",
             },
         },
+        likes: {
+            "0d33a2d3-101f-49e4-a22e-1117a83f172a": {
+                _ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
+                pictureId: "35c62d76-8152-4626-8712-eeb96381bea8",
+                userID: "847ec027-f659-4086-8032-5173e2f9c93a",
+                _createdOn: 1701599169675,
+                _id: "0d33a2d3-101f-49e4-a22e-1117a83f172a",
+            },
+        },
     };
     var rules$1 = {
         users: {
