@@ -51,6 +51,7 @@ export default function Register() {
                 <form onSubmit={onSubmit}>
                     <label htmlFor="username">Username:</label>
                     <input
+                        required
                         autoFocus
                         placeholder="Type your username"
                         type="text"
@@ -62,6 +63,7 @@ export default function Register() {
 
                     <label htmlFor="email">Email:</label>
                     <input
+                        required
                         placeholder="Type your email"
                         type="email"
                         id="email"
@@ -72,6 +74,7 @@ export default function Register() {
 
                     <label htmlFor="password">Password:</label>
                     <input
+                        required
                         placeholder="Type your password"
                         type="password"
                         id="password"
@@ -81,6 +84,7 @@ export default function Register() {
                     />
                     <label htmlFor="repeat-password">Repeat password:</label>
                     <input
+                        required
                         placeholder="Repeat password"
                         type="repeat-password"
                         id="repeat-password"

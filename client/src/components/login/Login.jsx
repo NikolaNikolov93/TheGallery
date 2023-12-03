@@ -50,6 +50,7 @@ export default function Login() {
                         <label>
                             Email:
                             <input
+                                required
                                 placeholder="Type your email"
                                 autoFocus
                                 type="text"
@@ -63,6 +64,7 @@ export default function Login() {
                         <label>
                             Password:
                             <input
+                                required
                                 placeholder="Type your password"
                                 type="password"
                                 id="password"
