@@ -64,6 +64,7 @@ export default function Login() {
                         <label>
                             Password:
                             <input
+                                autoComplete="off"
                                 required
                                 placeholder="Type your password"
                                 type="password"

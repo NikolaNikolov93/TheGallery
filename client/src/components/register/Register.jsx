@@ -74,6 +74,7 @@ export default function Register() {
 
                     <label htmlFor="password">Password:</label>
                     <input
+                        autoComplete="off"
                         required
                         placeholder="Type your password"
                         type="password"
@@ -84,9 +85,10 @@ export default function Register() {
                     />
                     <label htmlFor="repeat-password">Repeat password:</label>
                     <input
+                        autoComplete="off"
                         required
                         placeholder="Repeat password"
-                        type="repeat-password"
+                        type="password"
                         id="repeat-password"
                         name="repeat-password"
                         onChange={onChange}
