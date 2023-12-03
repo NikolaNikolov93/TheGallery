@@ -1,12 +1,4 @@
 .wrapperLoggedOut {
-    width: 335px;
-    height: 300px;
-    background-color: rgb(255, 255, 255);
-    margin-top: 20px;
-    text-align: center;
-    margin-bottom: 20px;
-}
-.wrapper {
     box-shadow: 0 0 4px 3px rgba(116, 116, 116, 0.867);
     width: 335px;
     height: 300px;
@@ -14,6 +6,16 @@
     margin-top: 20px;
     text-align: center;
     margin-bottom: 20px;
+    position: relative;
+}
+.wrapper {
+    box-shadow: 0 0 4px 3px rgba(116, 116, 116, 0.867);
+    width: 335px;
+    height: 300px;
+    background-color: rgb(255, 255, 255);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    position: relative;
 }
 
 .img {
@@ -22,45 +24,32 @@
     height: 85%;
     width: 100%;
 }
-.detailsButton {
-    border-radius: 10%;
-    font-family: "Raleway", sans-serif;
-    background-color: gray;
-    color: white;
-    top: 100px;
-    opacity: 0;
-    height: 60px;
-    width: 80px;
-    position: relative;
-}
 .headline {
+    float: inline-start;
     opacity: 1;
     cursor: pointer;
     font-size: 1.3vw;
     font-family: "Raleway", sans-serif;
     color: rgb(0, 0, 0);
-    position: relative;
-    bottom: -206px;
+    position: absolute;
+    padding-left: 10px;
 }
 .likeButtonLiked {
     border-radius: 10%;
     font-family: "Raleway", sans-serif;
-    background-color: rgb(224, 177, 155);
+    background-color: rgb(224, 177, 155) !important;
 }
 .likeButton {
     border-radius: 10%;
-    background-color: gray;
-    color: white;
 }
 .buttonsWrapper {
     opacity: 0;
 }
-.wrapperButton {
-    border-radius: 10%;
-    background-color: rgb(179, 177, 177);
-    color: white;
-}
+
 .buttonsWrapper button {
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 4px 1px rgba(116, 116, 116, 0.867);
+    background-color: white;
     border-radius: 10%;
     margin-left: 10px;
     top: 7px;
@@ -70,7 +59,7 @@
     font-family: "Raleway", sans-serif;
 }
 .likesCounter {
-    top: 10px;
+    padding-right: 10px;
     position: relative;
     display: inline-flex;
     float: right;
@@ -85,27 +74,36 @@
     float: inline-start;
     gap: 10px;
 }
+.wrapper:not(:hover) .buttonsWrapper {
+    opacity: 0;
+    pointer-events: none;
+    transition: all 1s;
+    display: inline-flex;
+    float: inline-start;
+    gap: 10px;
+}
 .wrapper:hover .headline {
     opacity: 0;
     transition: all 1s;
-}
-
-.wrapper:hover .detailsButton {
-    opacity: 1;
-    transition: all 1s;
-}
-.wrapper:not(:hover) .detailsButton {
-    opacity: 0;
-    transition: all 1s;
+    pointer-events: none;
 }
 .wrapper:not(:hover) .headline {
     opacity: 1;
     transition: all 1s;
 }
-.wrapper:not(:hover) .buttonsWrapper {
-    opacity: 0;
-    transition: all 1s;
-    display: inline-flex;
-    float: inline-start;
-    gap: 10px;
+
+.editButton:active {
+    transform: translateY(1px);
+}
+.deleteButton:active {
+    transform: translateY(1px);
+}
+.detailsButton:active {
+    transform: translateY(1px);
+}
+.likeButton:active {
+    transform: translateY(1px);
+}
+.likeButtonLiked:active {
+    transform: translateY(1px);
 }

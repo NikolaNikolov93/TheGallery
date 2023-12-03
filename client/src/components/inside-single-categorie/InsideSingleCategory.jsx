@@ -10,7 +10,7 @@ export default function InsideSingleCategory() {
     /* Setup for custom route guard */
     const categoryDefinition = useParams();
     const { categories } = useContext(CategoriesContext);
-    const { userId } = useContext(AuthContext);
+    const { userId, token } = useContext(AuthContext);
 
     let mappedCategories = categories.map((category) =>
         category.description.toLowerCase().replace(" ", "-")
@@ -41,10 +41,12 @@ export default function InsideSingleCategory() {
                         filteredPictures.map((picture) => (
                             <PictureWrapper
                                 key={picture._id}
+                                pictureId={picture._id}
                                 headline={picture.headline}
                                 url={picture.url}
                                 owner={picture._ownerId}
                                 currentUser={userId}
+                                token={token}
                             />
                         ))
                     ) : (

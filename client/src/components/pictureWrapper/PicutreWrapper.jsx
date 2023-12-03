@@ -1,18 +1,42 @@
 import styles from "../../components/pictureWrapper/PictureWrapper.module.css";
-import { useState } from "react";
-export default function PictureWrapper({ url, headline, owner, currentUser }) {
+import { useEffect, useState } from "react";
+import * as likeServices from "../../services/likesServices";
+export default function PictureWrapper({
+    pictureId,
+    url,
+    headline,
+    owner,
+    currentUser,
+    token,
+}) {
     const isOwner = owner === currentUser;
     const isLoggedIn = !!currentUser;
 
-    const [likes, setLikes] = useState(0);
     const [isClicked, setIsClicked] = useState(false);
-    const handleClick = () => {
+    const [likes, setLikes] = useState([]);
+
+    useEffect(() => {
+        likeServices
+            .getAll()
+            .then((likes) =>
+                likes
+                    ? likes.filter((like) => like.pictureId === pictureId)
+                    : []
+            )
+            .then((likes) => setLikes(likes.length))
+            .catch((err) => console.log(err));
+    }, []);
+
+    const likeButtonClickHandler = async () => {
         if (isClicked) {
             setLikes(likes - 1);
+            console.log(pictureId);
+            setIsClicked(false);
         } else {
-            setLikes(likes + 1);
+            await likeServices.addLike(pictureId, currentUser, token);
+            setLikes((state) => state + 1);
+            setIsClicked(true);
         }
-        setIsClicked(!isClicked);
     };
 
     return (
@@ -20,34 +44,32 @@ export default function PictureWrapper({ url, headline, owner, currentUser }) {
             className={styles[`${isLoggedIn ? "wrapper" : "wrapperLoggedOut"}`]}
         >
             <div
-                className={styles.img}
+                className={styles["img"]}
                 style={{ backgroundImage: `url(${url})` }}
             >
-                {isLoggedIn && (
-                    <>
-                        <button className={styles.detailsButton}>
-                            Details
-                        </button>
-                    </>
-                )}
-
-                <p className={styles.headline}>{headline}</p>
+                {isLoggedIn && <></>}
             </div>
             {isLoggedIn && (
                 <>
-                    <div className={styles.buttonsWrapper}>
+                    <div className={styles["buttonsWrapper"]}>
+                        <button
+                            className={styles["detailsButton"]}
+                            onClick={() => console.log(pictureId)}
+                        >
+                            Details
+                        </button>
                         {!isOwner && (
                             <>
                                 {isClicked ? (
                                     <button
-                                        onClick={() => handleClick()}
+                                        onClick={() => likeButtonClickHandler()}
                                         className={styles[`likeButtonLiked`]}
                                     >
                                         Liked
                                     </button>
                                 ) : (
                                     <button
-                                        onClick={() => handleClick()}
+                                        onClick={() => likeButtonClickHandler()}
                                         className={styles[`likeButton`]}
                                     >
                                         Like
@@ -58,10 +80,16 @@ export default function PictureWrapper({ url, headline, owner, currentUser }) {
 
                         {isOwner && (
                             <>
-                                <button className={styles.wrapperButton}>
+                                <button
+                                    className={styles["editButton"]}
+                                    onClick={() => console.log(pictureId)}
+                                >
                                     Edit
                                 </button>
-                                <button className={styles.wrapperButton}>
+                                <button
+                                    className={styles["deleteButton"]}
+                                    onClick={() => console.log(pictureId)}
+                                >
                                     Delete
                                 </button>
                             </>
@@ -69,7 +97,8 @@ export default function PictureWrapper({ url, headline, owner, currentUser }) {
                     </div>
                 </>
             )}
-            <div className={styles.likesCounter}>{`Likes: ${likes}`}</div>
+            <p className={styles["headline"]}>{headline}</p>
+            <p className={styles["likesCounter"]}>{`Likes: ${likes}`}</p>
         </div>
     );
 }

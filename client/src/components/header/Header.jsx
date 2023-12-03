@@ -7,7 +7,6 @@ import Register from "../register/Register";
 import AuthContext from "../contexts/authContext";
 
 export default function Header() {
-    // const [showLogin, setShowLogin] = useState(false);
     const {
         closeLoginModal,
         openLoginModal,
@@ -21,7 +20,6 @@ export default function Header() {
         email,
         token,
     } = useContext(AuthContext);
-    // const [showRegister, setShowRegister] = useState(false);
 
     return (
         <>
