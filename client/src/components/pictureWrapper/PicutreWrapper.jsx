@@ -8,37 +8,48 @@ export default function PictureWrapper({
     owner,
     currentUser,
     token,
+    username,
 }) {
-    const isOwner = owner === currentUser;
-    const isLoggedIn = !!currentUser;
-
     const [isClicked, setIsClicked] = useState(false);
     const [likes, setLikes] = useState([]);
+    useEffect(() => {
+        likeServices
+            .getAllPictureLikes(pictureId)
+            .then((pictureLikes) =>
+                pictureLikes.find((like) => like._ownerId === currentUser)
+            )
+            .then((isLiked) => setIsClicked(!!isLiked));
+    });
 
     useEffect(() => {
         likeServices
-            .getAll()
-            .then((likes) =>
-                likes
-                    ? likes.filter((like) => like.pictureId === pictureId)
-                    : []
-            )
-            .then((likes) => setLikes(likes.length))
+            .getAllPictureLikes(pictureId)
+            .then((likes) => setLikes(likes))
             .catch((err) => console.log(err));
     }, []);
+    const userLike = likes.filter((like) => like._ownerId === currentUser);
 
-    const likeButtonClickHandler = async () => {
+    const likeButtonClickHandler = async (userLike) => {
         if (isClicked) {
-            setLikes(likes - 1);
-            console.log(pictureId);
-            setIsClicked(false);
+            const deletedLike = await likeServices.removeLike(
+                userLike[0]._id,
+                token
+            );
+            setLikes((state) =>
+                state.filter((like) => like._id != userLike[0]._id)
+            );
         } else {
-            await likeServices.addLike(pictureId, currentUser, token);
-            setLikes((state) => state + 1);
-            setIsClicked(true);
+            const newLike = await likeServices.addLike(
+                pictureId,
+                currentUser,
+                username,
+                token
+            );
+            setLikes((state) => [...state, newLike]);
         }
     };
-
+    const isOwner = owner === currentUser;
+    const isLoggedIn = !!currentUser;
     return (
         <div
             className={styles[`${isLoggedIn ? "wrapper" : "wrapperLoggedOut"}`]}
@@ -62,14 +73,18 @@ export default function PictureWrapper({
                             <>
                                 {isClicked ? (
                                     <button
-                                        onClick={() => likeButtonClickHandler()}
+                                        onClick={() =>
+                                            likeButtonClickHandler(userLike)
+                                        }
                                         className={styles[`likeButtonLiked`]}
                                     >
                                         Liked
                                     </button>
                                 ) : (
                                     <button
-                                        onClick={() => likeButtonClickHandler()}
+                                        onClick={() =>
+                                            likeButtonClickHandler(userLike)
+                                        }
                                         className={styles[`likeButton`]}
                                     >
                                         Like
@@ -98,7 +113,7 @@ export default function PictureWrapper({
                 </>
             )}
             <p className={styles["headline"]}>{headline}</p>
-            <p className={styles["likesCounter"]}>{`Likes: ${likes}`}</p>
+            <p className={styles["likesCounter"]}>{`Likes: ${likes.length}`}</p>
         </div>
     );
 }

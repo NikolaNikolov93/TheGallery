@@ -10,7 +10,7 @@ export default function InsideSingleCategory() {
     /* Setup for custom route guard */
     const categoryDefinition = useParams();
     const { categories } = useContext(CategoriesContext);
-    const { userId, token } = useContext(AuthContext);
+    const { userId, token, username } = useContext(AuthContext);
 
     let mappedCategories = categories.map((category) =>
         category.description.toLowerCase().replace(" ", "-")
@@ -46,6 +46,7 @@ export default function InsideSingleCategory() {
                                 url={picture.url}
                                 owner={picture._ownerId}
                                 currentUser={userId}
+                                username={username}
                                 token={token}
                             />
                         ))
