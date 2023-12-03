@@ -1,7 +1,10 @@
 const baseUrl = "http://localhost:3030/data/pictures";
 
-export const getAll = async () => {
-    const response = await fetch(baseUrl);
+export const getAllPicturesOfSelectedCategory = async (category) => {
+    const query = new URLSearchParams({
+        where: `category="${category}"`,
+    });
+    const response = await fetch(`${baseUrl}?${query}`);
     const result = await response.json();
     const pictures = Object.values(result);
     return pictures;
@@ -12,7 +15,7 @@ export const create = async (values, token) => {
         headline: values.headline,
         description: values.description,
         url: values.url,
-        category: values.category,
+        category: values.category.toLowerCase().replace(" ", "-"),
     };
     const settings = {
         method: "POST",

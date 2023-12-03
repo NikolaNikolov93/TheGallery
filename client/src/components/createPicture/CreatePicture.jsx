@@ -14,7 +14,6 @@ export default function CreatePicture() {
     };
     const createPictureSubmitHandler = (values) => {
         pictureServices.create(values, token);
-        console.log(values);
     };
     const { token } = useContext(AuthContext);
     const { categories } = useContext(CategoriesContext);
@@ -64,7 +63,9 @@ export default function CreatePicture() {
                             >
                                 {categories.map((category) => (
                                     <option key={category._id}>
-                                        {category.description}
+                                        {category.description
+                                            .toUpperCase()
+                                            .replace("-", " ")}
                                     </option>
                                 ))}
                             </select>

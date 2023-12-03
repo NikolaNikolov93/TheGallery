@@ -19,7 +19,7 @@ export default function SingleCategory({ url, description }) {
                 style={{ backgroundImage: `url(${url})` }}
                 ata-bkg-img={url}
             >
-                <p>{description}</p>
+                <p>{description.toUpperCase().replace("-", " ")}</p>
             </div>
         </Link>
     );
