@@ -1592,27 +1592,40 @@
             },
         },
         pictures: {
-            "dbee841b-40bc-4377-8655-5208953bde28": {
+            "e16e7463-940f-4fcd-a6e6-15427b3fc3dc": {
                 _ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
+                username: "Peter",
+                headline: "Northern Lights",
+                description: "The picure was taken in Iceland!",
+                url: "https://www.68north.com/content/2013/03/friday-photo-12-aurora-68north.jpg",
+                category: "astrophotography",
+                _createdOn: 1701728140169,
+                _id: "e16e7463-940f-4fcd-a6e6-15427b3fc3dc",
+            },
+            "6990a201-e0be-4257-9b03-c47bbb4b271b": {
+                _ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
+                username: "George",
                 headline: "Sunset on the field",
                 description:
-                    "The picture is taken in the beautiful mountains of Rhodopes!",
+                    "The picture was taken in the beautiful Rhodopes Mountain.",
                 url: "https://i0.wp.com/picjumbo.com/wp-content/uploads/beautiful-nature-mountain-scenery-with-flowers-free-photo.jpg?w=600&quality=80",
                 category: "nature",
-                _createdOn: 1701679134756,
-                _id: "dbee841b-40bc-4377-8655-5208953bde28",
+                _createdOn: 1701728314031,
+                _id: "6990a201-e0be-4257-9b03-c47bbb4b271b",
+            },
+            "6eb1a3a5-1e17-4e78-8f71-926f4de6f5c8": {
+                _ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
+                username: "Peter",
+                headline: "Home",
+                description:
+                    "My new bedroom. We used home interior designer for the idea.",
+                url: "https://hips.hearstapps.com/hmg-prod/images/interior-design-ideas-idea-9-dwell-1-1644331792.jpg",
+                category: "home-interior",
+                _createdOn: 1701728480683,
+                _id: "6eb1a3a5-1e17-4e78-8f71-926f4de6f5c8",
             },
         },
-        likes: {
-            "764b8fcc-933a-4274-871a-e89d4efd5a21": {
-                _ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
-                pictureId: "dbee841b-40bc-4377-8655-5208953bde28",
-                userID: "847ec027-f659-4086-8032-5173e2f9c93a",
-                username: "George",
-                _createdOn: 1701679161786,
-                _id: "764b8fcc-933a-4274-871a-e89d4efd5a21",
-            },
-        },
+        likes: {},
     };
     var rules$1 = {
         users: {
