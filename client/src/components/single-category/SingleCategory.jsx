@@ -6,12 +6,7 @@ export default function SingleCategory({ url, description }) {
     const hrefLink = `${baseUrl}/${description
         .toLowerCase()
         .replace(/ /g, "-")}`;
-    // const mappedCategories = categoriesRef.map((cat) =>
-    //     cat.description.toLowerCase().replace(" ", "-")
-    // );
-    // if (!mappedCategories.includes(description)) {
-    //     console.log("OH NO !");
-    // }
+
     return (
         <Link className={styles.linkContainer} to={hrefLink}>
             <div

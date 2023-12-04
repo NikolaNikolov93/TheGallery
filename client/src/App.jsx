@@ -29,7 +29,7 @@ function App() {
                                 path="/:category"
                                 element={<InsideSingleCategory />}
                             />
-                            <Route path="*" Component={NotFound} />
+                            <Route path="*" element={<NotFound />} />
                         </Routes>
                     </main>
                     <Footer />

@@ -17,10 +17,6 @@ export default function InsideSingleCategory() {
     const { categories } = useContext(CategoriesContext);
     const { userId, token, username } = useContext(AuthContext);
 
-    let mappedCategories = categories.map((category) =>
-        category.description.toLowerCase().replace(" ", "-")
-    );
-
     const [pictures, setPictures] = useState([]);
     useEffect(() => {
         pictureServices
@@ -28,33 +24,33 @@ export default function InsideSingleCategory() {
             .then((pictures) => setPictures(pictures))
             .catch((err) => console.log(err));
     }, []);
-
-    for (const category in mappedCategories) {
-        if (mappedCategories[category] === categoryDefinition.category) {
-            /** checks if the URL param exist in the currently available categories */
-            /* and provides a custom route guard to prevent making request to unexisting categories */
-            return (
-                <div className={styles.container}>
-                    {pictures.length > 0 ? (
-                        pictures.map((picture) => (
-                            <PictureWrapper
-                                key={picture._id}
-                                pictureId={picture._id}
-                                headline={picture.headline}
-                                url={picture.url}
-                                owner={picture._ownerId}
-                                currentUser={userId}
-                                username={username}
-                                token={token}
-                            />
-                        ))
-                    ) : (
-                        <p>There are no pictures yet!</p>
-                    )}
-                </div>
-            );
-        }
+    /** checks if the URL param exist in the currently available categories */
+    /* and provides a custom route guard to prevent making request to unexisting categories */
+    const requestFilter = categories.filter(
+        (category) => category.description === categoryDefinition.category
+    );
+    if (requestFilter.length === 0) {
+        return <NotFound />;
     }
-
-    return <NotFound />;
+    /** */
+    return (
+        <div className={styles.container}>
+            {pictures.length > 0 ? (
+                pictures.map((picture) => (
+                    <PictureWrapper
+                        key={picture._id}
+                        pictureId={picture._id}
+                        headline={picture.headline}
+                        url={picture.url}
+                        owner={picture._ownerId}
+                        currentUser={userId}
+                        username={username}
+                        token={token}
+                    />
+                ))
+            ) : (
+                <p>There are no pictures yet!</p>
+            )}
+        </div>
+    );
 }
