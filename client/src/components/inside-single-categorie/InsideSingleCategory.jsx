@@ -39,6 +39,7 @@ export default function InsideSingleCategory() {
                 pictures.map((picture) => (
                     <PictureWrapper
                         key={picture._id}
+                        category={categoryDefinition.category}
                         pictureId={picture._id}
                         headline={picture.headline}
                         url={picture.url}

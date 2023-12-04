@@ -1,7 +1,10 @@
 import styles from "../../components/pictureWrapper/PictureWrapper.module.css";
+import { Link } from "react-router-dom";
+
 import { useEffect, useState } from "react";
 import * as likeServices from "../../services/likesServices";
 export default function PictureWrapper({
+    category,
     pictureId,
     url,
     headline,
@@ -63,12 +66,15 @@ export default function PictureWrapper({
             {isLoggedIn && (
                 <>
                     <div className={styles["buttonsWrapper"]}>
-                        <button
-                            className={styles["detailsButton"]}
-                            onClick={() => console.log(pictureId)}
-                        >
-                            Details
-                        </button>
+                        <Link to={`/${category}/${pictureId}/details`}>
+                            <button
+                                className={styles["detailsButton"]}
+                                onClick={() => console.log(pictureId)}
+                            >
+                                Details
+                            </button>
+                        </Link>
+
                         {!isOwner && (
                             <>
                                 {isClicked ? (

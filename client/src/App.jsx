@@ -29,6 +29,10 @@ function App() {
                                 path="/:category"
                                 element={<InsideSingleCategory />}
                             />
+                            <Route
+                                path="/:category/:pictureId/details"
+                                element={<div>Hello details!</div>}
+                            />
                             <Route path="*" element={<NotFound />} />
                         </Routes>
                     </main>

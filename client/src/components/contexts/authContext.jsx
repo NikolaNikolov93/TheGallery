@@ -32,7 +32,6 @@ export const AuthProvider = ({ children }) => {
         const result = await authService.login(values.email, values.password);
         setAuth(result);
         localStorage.setItem("accessToken", result.accessToken);
-        navigate("/#");
         closeLoginModal();
     };
 
@@ -52,7 +51,6 @@ export const AuthProvider = ({ children }) => {
         );
         setAuth(result);
         localStorage.setItem("accessToken", result.accessToken);
-        navigate("/#");
         closeRegisterModal();
     };
 
