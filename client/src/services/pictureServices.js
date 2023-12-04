@@ -10,8 +10,19 @@ export const getAllPicturesOfSelectedCategory = async (category) => {
     return pictures;
 };
 
+export const getOne = async (pictureId) => {
+    try {
+        const response = await fetch(`${baseUrl}/${pictureId}`);
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        return error;
+    }
+};
+
 export const create = async (values, token) => {
     const body = {
+        username: values.username,
         headline: values.headline,
         description: values.description,
         url: values.url,

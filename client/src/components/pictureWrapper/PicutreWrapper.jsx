@@ -67,10 +67,7 @@ export default function PictureWrapper({
                 <>
                     <div className={styles["buttonsWrapper"]}>
                         <Link to={`/${category}/${pictureId}/details`}>
-                            <button
-                                className={styles["detailsButton"]}
-                                onClick={() => console.log(pictureId)}
-                            >
+                            <button className={styles["detailsButton"]}>
                                 Details
                             </button>
                         </Link>

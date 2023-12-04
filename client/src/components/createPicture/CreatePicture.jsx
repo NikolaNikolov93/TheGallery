@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import Path from "../../paths";
 
 export default function CreatePicture() {
+    const { username } = useContext(AuthContext);
     const navigate = useNavigate();
     const CreatePicutreFormKeys = {
         Headline: "headline",
@@ -16,8 +17,9 @@ export default function CreatePicture() {
         Category: "category",
     };
     const createPictureSubmitHandler = async (values) => {
+        const finalValues = { ...values, username: username };
         try {
-            const result = await pictureServices.create(values, token);
+            const result = await pictureServices.create(finalValues, token);
             if (result) {
                 const navTo = values.category.toLowerCase().replace(" ", "-");
                 switch (navTo) {
@@ -63,15 +65,12 @@ export default function CreatePicture() {
     };
     const { token } = useContext(AuthContext);
     const { categories } = useContext(CategoriesContext);
-    /**Selected option state */
-    const [selectedOption, setSelectedOption] = useState("NATURE");
 
-    /**Form Handler */
     const { values, onChange, onSubmit } = useForm(createPictureSubmitHandler, {
         [CreatePicutreFormKeys.Headline]: "",
         [CreatePicutreFormKeys.URL]: "",
         [CreatePicutreFormKeys.Description]: "",
-        [CreatePicutreFormKeys.Category]: selectedOption,
+        [CreatePicutreFormKeys.Category]: "NATURE",
     });
 
     return (
@@ -103,6 +102,7 @@ export default function CreatePicture() {
                         <div>
                             <label>Select Category</label>
                             <select
+                                className="categorySelector"
                                 name="category"
                                 value={values[CreatePicutreFormKeys.Category]}
                                 onChange={onChange}

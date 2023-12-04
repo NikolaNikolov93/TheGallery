@@ -10,6 +10,7 @@ import InsideSingleCategory from "./components/inside-single-categorie/InsideSin
 import NotFound from "./components/notFound/NotFound";
 import Top10 from "./components/top10/top10";
 import CreatePicture from "./components/createPicture/CreatePicture";
+import Details from "./components/details/Details";
 
 function App() {
     return (
@@ -31,7 +32,7 @@ function App() {
                             />
                             <Route
                                 path="/:category/:pictureId/details"
-                                element={<div>Hello details!</div>}
+                                element={<Details />}
                             />
                             <Route path="*" element={<NotFound />} />
                         </Routes>

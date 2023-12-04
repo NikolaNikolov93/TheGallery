@@ -1,0 +1,35 @@
+.pageContainer {
+    padding-top: 10px;
+    max-width: 1903;
+    font-family: "Raleway", sans-serif;
+    text-align: center;
+}
+.pictureDetailsContainer {
+    display: flex;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.pictureImage {
+    box-shadow: 0 0 4px 6px #cccd;
+    width: 950px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.detailsSection {
+    font-size: xx-large;
+    text-align: left;
+    width: 950px;
+    height: auto;
+    flex-direction: column;
+}
+.detailsSection span {
+    font-weight: bold;
+}
+.detailsSection p {
+    margin: 0 0 20px 0;
+}
+.detailsSection a {
+    text-decoration: none;
+}
