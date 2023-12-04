@@ -4,16 +4,62 @@ import AuthContext from "../contexts/authContext";
 import useForm from "../../hooks/useFrom";
 import * as pictureServices from "../../services/pictureServices";
 import CategoriesContext from "../contexts/categoriesContext";
+import { useNavigate } from "react-router-dom";
+import Path from "../../paths";
 
 export default function CreatePicture() {
+    const navigate = useNavigate();
     const CreatePicutreFormKeys = {
         Headline: "headline",
         URL: "url",
         Description: "description",
         Category: "category",
     };
-    const createPictureSubmitHandler = (values) => {
-        pictureServices.create(values, token);
+    const createPictureSubmitHandler = async (values) => {
+        try {
+            const result = await pictureServices.create(values, token);
+            if (result) {
+                const navTo = values.category.toLowerCase().replace(" ", "-");
+                switch (navTo) {
+                    case "nature":
+                        navigate(Path.nature);
+                        break;
+                    case "love":
+                        navigate(Path.love);
+                        break;
+                    case "art":
+                        navigate(Path.art);
+                        break;
+                    case "animals":
+                        navigate(Path.animals);
+                        break;
+                    case "sports":
+                        navigate(Path.sports);
+                        break;
+                    case "animation":
+                        navigate(Path.animation);
+                        break;
+                    case "digital":
+                        navigate(Path.digital);
+                        break;
+                    case "home-interior":
+                        navigate(Path["home-interior"]);
+                        break;
+                    case "adventure":
+                        navigate(Path.adventure);
+                        break;
+                    case "architecture":
+                        navigate(Path.architecture);
+                        break;
+                    case "astrophotography":
+                        navigate(Path.astrophotography);
+                        break;
+                    case "fashion":
+                        navigate(Path.fashion);
+                        break;
+                }
+            }
+        } catch (error) {}
     };
     const { token } = useContext(AuthContext);
     const { categories } = useContext(CategoriesContext);
