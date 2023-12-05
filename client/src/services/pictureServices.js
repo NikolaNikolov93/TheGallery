@@ -41,3 +41,16 @@ export const create = async (values, token) => {
     const result = await response.json();
     return result;
 };
+export const remove = async (pictureId, token) => {
+    const settings = {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "X-Authorization": token,
+        },
+    };
+
+    const response = await fetch(`${baseUrl}/${pictureId}`, settings);
+    const result = await response.json();
+    return result;
+};

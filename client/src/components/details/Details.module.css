@@ -30,6 +30,10 @@
 .detailsSection p {
     margin: 0 0 20px 0;
 }
-.detailsSection a {
+.detailsSection .link {
     text-decoration: none;
+    color: black;
+}
+.headline {
+    background: rgb(188, 188, 188);
 }

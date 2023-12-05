@@ -5,7 +5,7 @@ import * as pictureServices from "../../services/pictureServices";
 import NotFound from "../notFound/NotFound";
 import transformTimestamp from "../../utils/transformTimestamp";
 
-export default function Details(e) {
+export default function Details() {
     const [pictureData, setPictureData] = useState([]);
     const { category, pictureId } = useParams();
 
@@ -15,13 +15,13 @@ export default function Details(e) {
             .then((pictureData) => setPictureData(pictureData));
     }, []);
     const uploadedDate = transformTimestamp(pictureData._createdOn);
-    console.log(e);
+    console.log();
 
     return pictureData.code === 404 ? (
         <NotFound />
     ) : (
         <div className={styles.pageContainer}>
-            <h1>{pictureData.headline}</h1>
+            <h1 className={styles.headline}>{pictureData.headline}</h1>
             <div className={styles.pictureDetailsContainer}>
                 <img
                     src={pictureData.url}
@@ -38,7 +38,9 @@ export default function Details(e) {
                     </p>
                     <p>
                         <span>Category:</span>{" "}
-                        <Link to={`/${category}`}>{pictureData.category}</Link>
+                        <Link className={styles.link} to={`/${category}`}>
+                            {pictureData.category}
+                        </Link>
                     </p>
                     <p>
                         <span>Desctiption:</span> {pictureData.description}

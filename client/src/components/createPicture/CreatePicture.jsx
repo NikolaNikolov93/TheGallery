@@ -21,8 +21,10 @@ export default function CreatePicture() {
         try {
             const result = await pictureServices.create(finalValues, token);
             if (result) {
-                const navTo = values.category.toLowerCase().replace(" ", "-");
-                switch (navTo) {
+                const navigateTo = values.category
+                    .toLowerCase()
+                    .replace(" ", "-");
+                switch (navigateTo) {
                     case "nature":
                         navigate(Path.nature);
                         break;
@@ -61,7 +63,9 @@ export default function CreatePicture() {
                         break;
                 }
             }
-        } catch (error) {}
+        } catch (error) {
+            console.log(error);
+        }
     };
     const { token } = useContext(AuthContext);
     const { categories } = useContext(CategoriesContext);

@@ -1,8 +1,13 @@
 import styles from "../../components/pictureWrapper/PictureWrapper.module.css";
-import { Link } from "react-router-dom";
+
+import { Link, useNavigate } from "react-router-dom";
 
 import { useEffect, useState } from "react";
+
+import Path from "../../paths";
 import * as likeServices from "../../services/likesServices";
+import * as pictureServices from "../../services/pictureServices";
+
 export default function PictureWrapper({
     category,
     pictureId,
@@ -12,9 +17,16 @@ export default function PictureWrapper({
     currentUser,
     token,
     username,
+    deletePicutre,
 }) {
+    const navigate = useNavigate();
+    /** Like button state --> On it's state depends the button funcionality and style.(remove or add like) */
     const [isClicked, setIsClicked] = useState(false);
+
+    /** Likes tate is used to visualize the current ammount of likes */
     const [likes, setLikes] = useState([]);
+
+    /** This is used to check if the current image is alredy liked by the user and sets the state  */
     useEffect(() => {
         likeServices
             .getAllPictureLikes(pictureId)
@@ -24,12 +36,15 @@ export default function PictureWrapper({
             .then((isLiked) => setIsClicked(!!isLiked));
     });
 
+    /**Sets current amount of likes */
     useEffect(() => {
         likeServices
             .getAllPictureLikes(pictureId)
             .then((likes) => setLikes(likes))
             .catch((err) => console.log(err));
     }, []);
+
+    /** Filters the likes array to find the like of the current user. It's used to remove the like from the database */
     const userLike = likes.filter((like) => like._ownerId === currentUser);
 
     const likeButtonClickHandler = async (userLike) => {
@@ -51,6 +66,7 @@ export default function PictureWrapper({
             setLikes((state) => [...state, newLike]);
         }
     };
+
     const isOwner = owner === currentUser;
     const isLoggedIn = !!currentUser;
     return (
@@ -98,15 +114,19 @@ export default function PictureWrapper({
 
                         {isOwner && (
                             <>
-                                <button
-                                    className={styles["editButton"]}
-                                    onClick={() => console.log(pictureId)}
-                                >
-                                    Edit
-                                </button>
+                                <Link to={`/${category}/${pictureId}/edit`}>
+                                    <button
+                                        className={styles["editButton"]}
+                                        // onClick={() => console.log(pictureId)}
+                                    >
+                                        Edit
+                                    </button>
+                                </Link>
                                 <button
                                     className={styles["deleteButton"]}
-                                    onClick={() => console.log(pictureId)}
+                                    onClick={() =>
+                                        deletePicutre(pictureId, token)
+                                    }
                                 >
                                     Delete
                                 </button>

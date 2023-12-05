@@ -32,7 +32,18 @@ export default function InsideSingleCategory() {
     if (requestFilter.length === 0) {
         return <NotFound />;
     }
-    /** */
+
+    const deleteButtonHandler = async (pictureId, token) => {
+        const isConfirmed = window.confirm("Are you sure?");
+        if (isConfirmed) {
+            await pictureServices.remove(pictureId, token);
+            setPictures((state) =>
+                state.filter((picture) => picture._id != pictureId)
+            );
+        } else {
+            console.log("User canceled");
+        }
+    };
     return (
         <div className={styles.container}>
             {pictures.length > 0 ? (
@@ -47,6 +58,7 @@ export default function InsideSingleCategory() {
                         currentUser={userId}
                         username={username}
                         token={token}
+                        deletePicutre={deleteButtonHandler}
                     />
                 ))
             ) : (
