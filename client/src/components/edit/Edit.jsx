@@ -1,83 +1,42 @@
 import styles from "../../components/edit/Edit.module.css";
-import { useContext } from "react";
+import * as pictureServices from "../../services/pictureServices";
+import { useContext, useEffect, useState } from "react";
 import AuthContext from "../contexts/authContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CategoriesContext from "../contexts/categoriesContext";
 import useForm from "../../hooks/useFrom";
+import Path from "../../paths";
 
 export default function Edit() {
-    const { username, token } = useContext(AuthContext);
-    const navigate = useNavigate();
-    const EditPictureFormKeys = {
-        Headline: "headline",
-        URL: "url",
-        Description: "description",
-        Category: "category",
-    };
-    const editPictureSubmitHandler = async (values) => {
-        console.log(values);
-
-        // try {
-        //     const result = await pictureServices.update(values, token);
-        //     if (result) {
-        //         const navigateTo = values.category
-        //             .toLowerCase()
-        //             .replace(" ", "-");
-        //         switch (navigateTo) {
-        //             case "nature":
-        //                 navigate(Path.nature);
-        //                 break;
-        //             case "love":
-        //                 navigate(Path.love);
-        //                 break;
-        //             case "art":
-        //                 navigate(Path.art);
-        //                 break;
-        //             case "animals":
-        //                 navigate(Path.animals);
-        //                 break;
-        //             case "sports":
-        //                 navigate(Path.sports);
-        //                 break;
-        //             case "animation":
-        //                 navigate(Path.animation);
-        //                 break;
-        //             case "digital":
-        //                 navigate(Path.digital);
-        //                 break;
-        //             case "home-interior":
-        //                 navigate(Path["home-interior"]);
-        //                 break;
-        //             case "adventure":
-        //                 navigate(Path.adventure);
-        //                 break;
-        //             case "architecture":
-        //                 navigate(Path.architecture);
-        //                 break;
-        //             case "astrophotography":
-        //                 navigate(Path.astrophotography);
-        //                 break;
-        //             case "fashion":
-        //                 navigate(Path.fashion);
-        //                 break;
-        //         }
-        //     }
-        // } catch (error) {
-        //     console.log(error);
-        // }
-    };
+    const { pictureId } = useParams();
+    const { token } = useContext(AuthContext);
     const { categories } = useContext(CategoriesContext);
-    const { values, onChange, onSubmit } = useForm(editPictureSubmitHandler, {
-        [editPictureSubmitHandler.Headline]: "",
-        [editPictureSubmitHandler.URL]: "",
-        [editPictureSubmitHandler.Description]: "",
-        [editPictureSubmitHandler.Category]: "NATURE",
+    const [pictureData, setPictureData] = useState({
+        headline: "",
+        url: "",
+        category: "",
+        description: "",
     });
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        pictureServices.getOne(pictureId).then((result) => {
+            setPictureData(result);
+        });
+    }, [pictureId]);
+    const editPictureSubmitHandler = async (values) => {
+        await pictureServices.edit(values, pictureId, token);
+        navigate(Path[values.category]);
+    };
+    const { values, onChange, onSubmit } = useForm(
+        editPictureSubmitHandler,
+        pictureData
+    );
     return (
         <>
             <div className={styles["container"]}>
                 <div className={styles["container-content"]}>
-                    <h2>Add Image</h2>
+                    <h2>Edit Image</h2>
                     <form onSubmit={onSubmit}>
                         <label htmlFor="headline">Headline</label>
                         <input
@@ -87,7 +46,7 @@ export default function Edit() {
                             id="headline"
                             name="headline"
                             onChange={onChange}
-                            value={values[EditPictureFormKeys.Headline]}
+                            value={values.headline}
                         />
                         <label htmlFor="URL">URL</label>
                         <input
@@ -96,7 +55,7 @@ export default function Edit() {
                             id="url"
                             name="url"
                             onChange={onChange}
-                            value={values[editPictureSubmitHandler.URL]}
+                            value={values.url}
                         />
 
                         <div>
@@ -104,11 +63,10 @@ export default function Edit() {
                             <select
                                 className="categorySelector"
                                 name="category"
-                                value={
-                                    values[editPictureSubmitHandler.Category]
-                                }
+                                value={values.category}
                                 onChange={onChange}
                             >
+                                <option>Select category...</option>
                                 {categories.map((category) => (
                                     <option key={category._id}>
                                         {category.description
@@ -125,14 +83,14 @@ export default function Edit() {
                             id="description"
                             name="description"
                             onChange={onChange}
-                            value={values[editPictureSubmitHandler.Description]}
+                            value={values.description}
                         />
 
                         <button
                             type="submit"
                             className={styles["submitButton"]}
                         >
-                            Submit Picture
+                            Edit Picture
                         </button>
                     </form>
                 </div>

@@ -41,6 +41,27 @@ export const create = async (values, token) => {
     const result = await response.json();
     return result;
 };
+export const edit = async (values, pictureId, token) => {
+    const body = {
+        username: values.username,
+        headline: values.headline,
+        description: values.description,
+        url: values.url,
+        category: values.category.toLowerCase().replace(" ", "-"),
+    };
+    const settings = {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+            "X-Authorization": token,
+        },
+        body: JSON.stringify(body),
+    };
+
+    const response = await fetch(`${baseUrl}/${pictureId}`, settings);
+    const result = await response.json();
+    return result;
+};
 export const remove = async (pictureId, token) => {
     const settings = {
         method: "DELETE",

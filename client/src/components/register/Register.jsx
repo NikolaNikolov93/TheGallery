@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import styles from "./Register.module.css";
 import AuthContext from "../contexts/authContext";
 import useForm from "../../hooks/useFrom";
@@ -11,12 +11,19 @@ export default function Register() {
     };
     const { openLoginModal, closeRegisterModal, registerSubmitHandler } =
         useContext(AuthContext);
-    const { values, onChange, onSubmit } = useForm(registerSubmitHandler, {
-        [RegisterFormKeys.Email]: "",
-        [RegisterFormKeys.Username]: "",
-        [RegisterFormKeys.Password]: "",
-        [RegisterFormKeys.Repass]: "",
-    });
+    const initialValues = useMemo(
+        () => ({
+            [RegisterFormKeys.Email]: "",
+            [RegisterFormKeys.Username]: "",
+            [RegisterFormKeys.Password]: "",
+            [RegisterFormKeys.Repass]: "",
+        }),
+        []
+    );
+    const { values, onChange, onSubmit } = useForm(
+        registerSubmitHandler,
+        initialValues
+    );
     const relocate = () => {
         closeRegisterModal();
         openLoginModal();

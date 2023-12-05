@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import styles from ".././createPicture/CreatePicture.module.css";
 import AuthContext from "../contexts/authContext";
 import useForm from "../../hooks/useFrom";
@@ -24,44 +24,7 @@ export default function CreatePicture() {
                 const navigateTo = values.category
                     .toLowerCase()
                     .replace(" ", "-");
-                switch (navigateTo) {
-                    case "nature":
-                        navigate(Path.nature);
-                        break;
-                    case "love":
-                        navigate(Path.love);
-                        break;
-                    case "art":
-                        navigate(Path.art);
-                        break;
-                    case "animals":
-                        navigate(Path.animals);
-                        break;
-                    case "sports":
-                        navigate(Path.sports);
-                        break;
-                    case "animation":
-                        navigate(Path.animation);
-                        break;
-                    case "digital":
-                        navigate(Path.digital);
-                        break;
-                    case "home-interior":
-                        navigate(Path["home-interior"]);
-                        break;
-                    case "adventure":
-                        navigate(Path.adventure);
-                        break;
-                    case "architecture":
-                        navigate(Path.architecture);
-                        break;
-                    case "astrophotography":
-                        navigate(Path.astrophotography);
-                        break;
-                    case "fashion":
-                        navigate(Path.fashion);
-                        break;
-                }
+                navigate(Path[navigateTo]);
             }
         } catch (error) {
             console.log(error);
@@ -69,13 +32,19 @@ export default function CreatePicture() {
     };
     const { token } = useContext(AuthContext);
     const { categories } = useContext(CategoriesContext);
-
-    const { values, onChange, onSubmit } = useForm(createPictureSubmitHandler, {
-        [CreatePicutreFormKeys.Headline]: "",
-        [CreatePicutreFormKeys.URL]: "",
-        [CreatePicutreFormKeys.Description]: "",
-        [CreatePicutreFormKeys.Category]: "NATURE",
-    });
+    const initialValues = useMemo(
+        () => ({
+            [CreatePicutreFormKeys.Headline]: "",
+            [CreatePicutreFormKeys.URL]: "",
+            [CreatePicutreFormKeys.Description]: "",
+            [CreatePicutreFormKeys.Category]: "NATURE",
+        }),
+        []
+    );
+    const { values, onChange, onSubmit } = useForm(
+        createPictureSubmitHandler,
+        initialValues
+    );
 
     return (
         <>

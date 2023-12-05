@@ -1,5 +1,5 @@
 import useForm from "../../hooks/useFrom";
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import styles from "../login/Login.module.css";
 import AuthContext from "../contexts/authContext";
 
@@ -11,10 +11,17 @@ const LoginFromKeys = {
 export default function Login() {
     const { loginSubmitHandler, closeLoginModal, openRegisterModal } =
         useContext(AuthContext);
-    const { values, onChange, onSubmit } = useForm(loginSubmitHandler, {
-        [LoginFromKeys.Email]: "",
-        [LoginFromKeys.Password]: "",
-    });
+    const initialValues = useMemo(
+        () => ({
+            [LoginFromKeys.Email]: "",
+            [LoginFromKeys.Password]: "",
+        }),
+        []
+    );
+    const { values, onChange, onSubmit } = useForm(
+        loginSubmitHandler,
+        initialValues
+    );
     const relocate = () => {
         closeLoginModal();
         openRegisterModal();
