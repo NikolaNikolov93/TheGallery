@@ -11,6 +11,8 @@ const AuthContext = createContext();
 AuthContext.displayName = "AuthContext";
 
 export const AuthProvider = ({ children }) => {
+    const [errorMsg, setErrorMsg] = useState("");
+    const [hasError, setError] = useState(false);
     const navigate = useNavigate();
 
     /**Authentication state */
@@ -29,10 +31,22 @@ export const AuthProvider = ({ children }) => {
     };
 
     const loginSubmitHandler = async (values) => {
-        const result = await authService.login(values.email, values.password);
-        setAuth(result);
-        localStorage.setItem("accessToken", result.accessToken);
-        closeLoginModal();
+        try {
+            const response = await authService.login(
+                values.email,
+                values.password
+            );
+            if (response.ok) {
+                setAuth(result);
+                localStorage.setItem("accessToken", result.accessToken);
+                closeLoginModal();
+            }
+            setError(true);
+            setErrorMsg(response.message);
+            throw new Error(`Error: ${response.message}`);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     /** Lifted state for the Register From */
@@ -73,6 +87,8 @@ export const AuthProvider = ({ children }) => {
         showRegister,
         registerSubmitHandler,
         logoutHandler,
+        hasError,
+        errorMsg,
         username: auth.username,
         email: auth.email,
         isAuthenticated: !!auth.accessToken,

@@ -6,8 +6,11 @@ import * as pictureServices from "../../services/pictureServices";
 import CategoriesContext from "../contexts/categoriesContext";
 import { useNavigate } from "react-router-dom";
 import Path from "../../paths";
+import formValidator from "../../utils/formValidator";
 
 export default function CreatePicture() {
+    const [errorMsg, setErrorMsg] = useState("");
+    const [hasError, setError] = useState(false);
     const { username } = useContext(AuthContext);
     const navigate = useNavigate();
     const CreatePicutreFormKeys = {
@@ -17,6 +20,12 @@ export default function CreatePicture() {
         Category: "category",
     };
     const createPictureSubmitHandler = async (values) => {
+        const validationResult = formValidator(values);
+        if (!validationResult.isValid) {
+            setError(true);
+            setErrorMsg(validationResult.errorMessage);
+            throw new Error(validationResult.errorMessage);
+        }
         const finalValues = { ...values, username: username };
         try {
             const result = await pictureServices.create(finalValues, token);
@@ -51,6 +60,11 @@ export default function CreatePicture() {
             <div className={styles["container"]}>
                 <div className={styles["container-content"]}>
                     <h2>Add Image</h2>
+                    {hasError && (
+                        <>
+                            <p className={styles["errorMsg"]}>{errorMsg}</p>
+                        </>
+                    )}
                     <form onSubmit={onSubmit}>
                         <label htmlFor="headline">Headline</label>
                         <input

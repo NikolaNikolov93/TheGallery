@@ -80,3 +80,9 @@ option {
 .submitButton:hover {
     background-color: #cfc0bc;
 }
+.errorMsg {
+    font-family: "Raleway", sans-serif;
+    text-align: center;
+    color: red;
+    margin-bottom: 30px;
+}

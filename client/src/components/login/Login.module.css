@@ -78,3 +78,9 @@ h2 {
 .register-redirection a {
     text-decoration: none;
 }
+.errorMsg {
+    font-family: "Raleway", sans-serif;
+    text-align: center;
+    color: red;
+    margin-bottom: 30px;
+}

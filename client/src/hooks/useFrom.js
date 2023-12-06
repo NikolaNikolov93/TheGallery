@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import formValidator from "../utils/formValidator";
 
 export default function useForm(submitHandler, initialValues) {
     const [values, setValues] = useState(initialValues);
@@ -15,7 +16,9 @@ export default function useForm(submitHandler, initialValues) {
     };
     const onSubmit = (e) => {
         e.preventDefault();
-        submitHandler(values);
+        try {
+            submitHandler(values);
+        } catch (error) {}
     };
 
     return {

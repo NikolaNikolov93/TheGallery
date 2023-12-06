@@ -6,8 +6,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import CategoriesContext from "../contexts/categoriesContext";
 import useForm from "../../hooks/useFrom";
 import Path from "../../paths";
+import formValidator from "../../utils/formValidator";
 
 export default function Edit() {
+    const [errorMsg, setErrorMsg] = useState("");
+    const [hasError, setError] = useState(false);
     const { pictureId } = useParams();
     const { token } = useContext(AuthContext);
     const { categories } = useContext(CategoriesContext);
@@ -25,8 +28,15 @@ export default function Edit() {
         });
     }, [pictureId]);
     const editPictureSubmitHandler = async (values) => {
+        const validationResult = formValidator(values);
+        if (!validationResult.isValid) {
+            setError(true);
+            setErrorMsg(validationResult.errorMessage);
+            throw new Error(validationResult.errorMessage);
+        }
+
         await pictureServices.edit(values, pictureId, token);
-        navigate(Path[values.category]);
+        navigate(Path[values.category.toLowerCase().replace(" ", "-")]);
     };
     const { values, onChange, onSubmit } = useForm(
         editPictureSubmitHandler,
@@ -37,9 +47,16 @@ export default function Edit() {
             <div className={styles["container"]}>
                 <div className={styles["container-content"]}>
                     <h2>Edit Image</h2>
+
+                    {hasError && (
+                        <>
+                            <p className={styles["errorMsg"]}>{errorMsg}</p>
+                        </>
+                    )}
                     <form onSubmit={onSubmit}>
                         <label htmlFor="headline">Headline</label>
                         <input
+                            required
                             autoFocus
                             placeholder="Type headline for your picture"
                             type="text"
@@ -50,6 +67,7 @@ export default function Edit() {
                         />
                         <label htmlFor="URL">URL</label>
                         <input
+                            required
                             placeholder="Type URL for your picture"
                             type="url"
                             id="url"
@@ -61,6 +79,7 @@ export default function Edit() {
                         <div>
                             <label>Select Category</label>
                             <select
+                                required
                                 className="categorySelector"
                                 name="category"
                                 value={values.category}
@@ -78,6 +97,7 @@ export default function Edit() {
                         </div>
                         <label htmlFor="description">Picture Description</label>
                         <textarea
+                            required
                             placeholder="Type short picture description"
                             type="description"
                             id="description"

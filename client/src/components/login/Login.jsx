@@ -9,8 +9,13 @@ const LoginFromKeys = {
 };
 
 export default function Login() {
-    const { loginSubmitHandler, closeLoginModal, openRegisterModal } =
-        useContext(AuthContext);
+    const {
+        loginSubmitHandler,
+        closeLoginModal,
+        openRegisterModal,
+        hasError,
+        errorMsg,
+    } = useContext(AuthContext);
     const initialValues = useMemo(
         () => ({
             [LoginFromKeys.Email]: "",
@@ -53,6 +58,11 @@ export default function Login() {
                         &times;
                     </span>
                     <h2>Login</h2>
+                    {hasError && (
+                        <>
+                            <p className={styles["errorMsg"]}>{errorMsg}</p>
+                        </>
+                    )}
                     <form onSubmit={onSubmit}>
                         <label>
                             Email:
