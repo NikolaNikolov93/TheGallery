@@ -23,6 +23,7 @@
     width: 950px;
     height: auto;
     flex-direction: column;
+    background-color: rgb(255, 255, 255);
 }
 .detailsSection span {
     font-weight: bold;

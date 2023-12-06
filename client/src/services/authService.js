@@ -30,9 +30,16 @@ export const register = async (email, password, username) => {
         },
         body: JSON.stringify(body),
     };
-    const response = await fetch(`${baseUrl}/register`, settings);
-    const result = await response.json();
-    return result;
+    try {
+        const response = await fetch(`${baseUrl}/register`, settings);
+        if (response.status === "403") {
+            throw new Error(`${response.message}`);
+        }
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        return error;
+    }
 };
 
 export const logout = async (token) => {

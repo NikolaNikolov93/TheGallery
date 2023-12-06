@@ -59,7 +59,7 @@ export default function Login() {
                     <span className={styles["close"]} onClick={closeLoginModal}>
                         &times;
                     </span>
-                    <h2>Login</h2>
+                    <p className={styles["formHeadline"]}>Login</p>
                     {hasError && (
                         <>
                             <p className={styles["errorMsg"]}>{errorMsg}</p>

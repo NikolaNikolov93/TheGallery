@@ -23,6 +23,7 @@ export const getOne = async (pictureId) => {
 export const create = async (values, token) => {
     const body = {
         username: values.username,
+        email: values.email,
         headline: values.headline,
         description: values.description,
         url: values.url,

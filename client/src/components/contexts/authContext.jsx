@@ -6,6 +6,7 @@ import * as authService from "../../services/authService";
 import Path from "../../paths";
 
 import usePeristedState from "../../hooks/usePersistedState";
+import formValidator from "../../utils/formValidator";
 
 const AuthContext = createContext();
 AuthContext.displayName = "AuthContext";
@@ -37,6 +38,13 @@ export const AuthProvider = ({ children }) => {
     };
 
     const loginSubmitHandler = async (values) => {
+        const validationResult = formValidator(values);
+        console.log(validationResult);
+        if (!validationResult.isValid) {
+            setError(true);
+            setErrorMsg(validationResult.errorMessage);
+            throw new Error(validationResult.errorMessage);
+        }
         const response = await authService.login(values.email, values.password);
 
         if (response["code"]) {
@@ -54,19 +62,33 @@ export const AuthProvider = ({ children }) => {
     const [showRegister, setShowRegister] = useState(false);
     const closeRegisterModal = () => {
         setShowRegister(false);
+        errorCleanup();
     };
     const openRegisterModal = () => {
         setShowRegister(true);
     };
     const registerSubmitHandler = async (values) => {
-        const result = await authService.register(
+        const validationResult = formValidator(values);
+        console.log(validationResult);
+        if (!validationResult.isValid) {
+            setError(true);
+            setErrorMsg(validationResult.errorMessage);
+            throw new Error(validationResult.errorMessage);
+        }
+        const response = await authService.register(
             values.email,
             values.password,
             values.username
         );
-        setAuth(result);
-        localStorage.setItem("accessToken", result.accessToken);
-        closeRegisterModal();
+        if (response["code"]) {
+            setError(true);
+            setErrorMsg(response.message);
+            return;
+        } else if (response["accessToken"]) {
+            setAuth(response);
+            localStorage.setItem("accessToken", response.accessToken);
+            closeRegisterModal();
+        }
     };
 
     /**Logout handler */

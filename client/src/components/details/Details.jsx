@@ -15,7 +15,6 @@ export default function Details() {
             .then((pictureData) => setPictureData(pictureData));
     }, []);
     const uploadedDate = transformTimestamp(pictureData._createdOn);
-    console.log();
 
     return pictureData.code === 404 ? (
         <NotFound />
@@ -32,6 +31,10 @@ export default function Details() {
                 <div className={styles.detailsSection}>
                     <p>
                         <span>Image uploaded by:</span> {pictureData.username}
+                    </p>
+                    <p>
+                        <span>{`${pictureData.username}'s contacts:`}</span>{" "}
+                        {pictureData.email}
                     </p>
                     <p>
                         <span>Uploaded on:</span> {uploadedDate}

@@ -9,8 +9,14 @@ export default function Register() {
         Repass: "repeat-password",
         Username: "username",
     };
-    const { openLoginModal, closeRegisterModal, registerSubmitHandler } =
-        useContext(AuthContext);
+    const {
+        openLoginModal,
+        closeRegisterModal,
+        registerSubmitHandler,
+        hasError,
+        errorMsg,
+        errorCleanup,
+    } = useContext(AuthContext);
     const initialValues = useMemo(
         () => ({
             [RegisterFormKeys.Email]: "",
@@ -22,7 +28,8 @@ export default function Register() {
     );
     const { values, onChange, onSubmit } = useForm(
         registerSubmitHandler,
-        initialValues
+        initialValues,
+        errorCleanup
     );
     const relocate = () => {
         closeRegisterModal();
@@ -54,7 +61,12 @@ export default function Register() {
                 <span className={styles["close"]} onClick={closeRegisterModal}>
                     &times;
                 </span>
-                <h2>Register</h2>
+                <p className={styles["formHeadline"]}>Register</p>
+                {hasError && (
+                    <>
+                        <p className={styles["errorMsg"]}>{errorMsg}</p>
+                    </>
+                )}
                 <form onSubmit={onSubmit}>
                     <label htmlFor="username">Username:</label>
                     <input

@@ -21,6 +21,10 @@ export default function Edit() {
         description: "",
     });
     const navigate = useNavigate();
+    const errorCleanup = () => {
+        setError(false);
+        setErrorMsg("");
+    };
 
     useEffect(() => {
         pictureServices.getOne(pictureId).then((result) => {
@@ -40,7 +44,8 @@ export default function Edit() {
     };
     const { values, onChange, onSubmit } = useForm(
         editPictureSubmitHandler,
-        pictureData
+        pictureData,
+        errorCleanup
     );
     return (
         <>

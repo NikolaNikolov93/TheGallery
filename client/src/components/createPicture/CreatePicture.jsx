@@ -11,13 +11,17 @@ import formValidator from "../../utils/formValidator";
 export default function CreatePicture() {
     const [errorMsg, setErrorMsg] = useState("");
     const [hasError, setError] = useState(false);
-    const { username } = useContext(AuthContext);
+    const { username, email } = useContext(AuthContext);
     const navigate = useNavigate();
     const CreatePicutreFormKeys = {
         Headline: "headline",
         URL: "url",
         Description: "description",
         Category: "category",
+    };
+    const errorCleanup = () => {
+        setError(false);
+        setErrorMsg("");
     };
     const createPictureSubmitHandler = async (values) => {
         const validationResult = formValidator(values);
@@ -26,7 +30,7 @@ export default function CreatePicture() {
             setErrorMsg(validationResult.errorMessage);
             throw new Error(validationResult.errorMessage);
         }
-        const finalValues = { ...values, username: username };
+        const finalValues = { ...values, username: username, email: email };
         try {
             const result = await pictureServices.create(finalValues, token);
             if (result) {
@@ -52,7 +56,8 @@ export default function CreatePicture() {
     );
     const { values, onChange, onSubmit } = useForm(
         createPictureSubmitHandler,
-        initialValues
+        initialValues,
+        errorCleanup
     );
 
     return (
