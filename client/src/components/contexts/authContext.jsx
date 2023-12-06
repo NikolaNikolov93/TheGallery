@@ -15,6 +15,11 @@ export const AuthProvider = ({ children }) => {
     const [hasError, setError] = useState(false);
     const navigate = useNavigate();
 
+    const errorCleanup = () => {
+        setError(false);
+        setErrorMsg("");
+    };
+
     /**Authentication state */
     const [auth, setAuth] = usePeristedState("auth", {});
 
@@ -25,27 +30,23 @@ export const AuthProvider = ({ children }) => {
         ); /** usePersistedState is custom hook for persisting the state in the localStorage */
     const closeLoginModal = () => {
         setShowLogin(false);
+        errorCleanup();
     };
     const openLoginModal = () => {
         setShowLogin(true);
     };
 
     const loginSubmitHandler = async (values) => {
-        try {
-            const response = await authService.login(
-                values.email,
-                values.password
-            );
-            if (response.ok) {
-                setAuth(result);
-                localStorage.setItem("accessToken", result.accessToken);
-                closeLoginModal();
-            }
+        const response = await authService.login(values.email, values.password);
+
+        if (response["code"]) {
             setError(true);
             setErrorMsg(response.message);
-            throw new Error(`Error: ${response.message}`);
-        } catch (error) {
-            console.log(error);
+            return;
+        } else if (response["accessToken"]) {
+            setAuth(response);
+            localStorage.setItem("accessToken", response.accessToken);
+            closeLoginModal();
         }
     };
 
@@ -89,6 +90,7 @@ export const AuthProvider = ({ children }) => {
         logoutHandler,
         hasError,
         errorMsg,
+        errorCleanup,
         username: auth.username,
         email: auth.email,
         isAuthenticated: !!auth.accessToken,

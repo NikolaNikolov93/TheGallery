@@ -15,6 +15,7 @@ export default function Login() {
         openRegisterModal,
         hasError,
         errorMsg,
+        errorCleanup,
     } = useContext(AuthContext);
     const initialValues = useMemo(
         () => ({
@@ -25,7 +26,8 @@ export default function Login() {
     );
     const { values, onChange, onSubmit } = useForm(
         loginSubmitHandler,
-        initialValues
+        initialValues,
+        errorCleanup
     );
     const relocate = () => {
         closeLoginModal();

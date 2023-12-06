@@ -9,9 +9,16 @@ export const login = async (email, password) => {
         },
         body: JSON.stringify(body),
     };
-    const response = await fetch(`${baseUrl}/login`, settings);
-    const result = await response.json();
-    return result;
+    try {
+        const response = await fetch(`${baseUrl}/login`, settings);
+        if (response.status === "403") {
+            throw new Error(`${response.message}`);
+        }
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        return error;
+    }
 };
 
 export const register = async (email, password, username) => {
