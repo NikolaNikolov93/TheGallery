@@ -40,3 +40,8 @@ export const removeLike = async (likeID, token) => {
     const result = await response.json();
     return result;
 };
+export const getAll = async () => {
+    const response = await fetch(baseUrl);
+    const result = await response.json();
+    return Object.values(result);
+};
