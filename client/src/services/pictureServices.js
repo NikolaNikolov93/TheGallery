@@ -76,3 +76,10 @@ export const remove = async (pictureId, token) => {
     const result = await response.json();
     return result;
 };
+
+export const getAll = async () => {
+    const response = await fetch(baseUrl);
+    const result = await response.json();
+    const pictures = Object.values(result);
+    return pictures;
+};
