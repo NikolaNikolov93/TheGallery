@@ -40,7 +40,7 @@ export default function Top10() {
     function compareByLikes(a, b) {
         return b.amountLikes.length - a.amountLikes.length;
     }
-    const sorted = picutresWithLikes.sort(compareByLikes);
+    const sorted = picutresWithLikes.sort(compareByLikes).slice(0, 10);
 
     return (
         <>
