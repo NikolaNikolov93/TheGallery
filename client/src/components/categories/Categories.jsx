@@ -12,8 +12,13 @@ export default function Categories() {
     return (
         <>
             <DividerCategoryLine />
+            <div className={styles["search-container"]}>
+                <p>Search by category type</p>
+                <input autoFocus type="text" placeholder="Search..." />
+            </div>
+
             <section className={styles.categoriesContainer}>
-                {categories.map((category) => (
+                {categories.map((category, index) => (
                     <SingleCategory
                         key={category._id}
                         url={category.url}
