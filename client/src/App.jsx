@@ -8,7 +8,7 @@ import Footer from "./components/footer/Footer";
 import Header from "./components/header/Header";
 import InsideSingleCategory from "./components/inside-single-categorie/InsideSingleCategory";
 import NotFound from "./components/notFound/NotFound";
-import Top10 from "./components/top10/top10";
+import Top10 from "./components/top10/Top10";
 import CreatePicture from "./components/createPicture/CreatePicture";
 import Details from "./components/details/Details";
 import Edit from "./components/edit/Edit";

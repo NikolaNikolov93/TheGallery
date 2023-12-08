@@ -10,13 +10,17 @@ import PictureWrapper from "../pictureWrapper/PicutreWrapper";
 
 import CategoriesContext from "../contexts/categoriesContext";
 import AuthContext from "../contexts/authContext";
+import Pagination from "../pagination/Pagination";
 
 export default function InsideSingleCategory() {
     /* Setup for custom route guard */
     const categoryDefinition = useParams();
     const { categories } = useContext(CategoriesContext);
     const { userId, token, username } = useContext(AuthContext);
-
+    //pagination setup
+    const [currentPage, setCurrentPage] = useState(1);
+    const [picsPerPage] = useState(4);
+    //pictures fetch
     const [pictures, setPictures] = useState([]);
     useEffect(() => {
         pictureServices
@@ -44,26 +48,44 @@ export default function InsideSingleCategory() {
             console.log("User canceled");
         }
     };
+    const indexOfLastPic = currentPage * picsPerPage;
+    const indexOfFirstPic = indexOfLastPic - picsPerPage;
+    const currentPics = pictures.slice(indexOfFirstPic, indexOfLastPic);
+    //Change page
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
     return (
-        <div className={styles.container}>
-            {pictures.length > 0 ? (
-                pictures.map((picture) => (
-                    <PictureWrapper
-                        key={picture._id}
-                        category={categoryDefinition.category}
-                        pictureId={picture._id}
-                        headline={picture.headline}
-                        url={picture.url}
-                        owner={picture._ownerId}
-                        currentUser={userId}
-                        username={username}
-                        token={token}
-                        deletePicutre={deleteButtonHandler}
-                    />
-                ))
-            ) : (
-                <p>There are no pictures yet!</p>
-            )}
-        </div>
+        <>
+            <div className={styles.container}>
+                {pictures.length > 0 ? (
+                    currentPics.map((picture) => (
+                        <PictureWrapper
+                            key={picture._id}
+                            category={categoryDefinition.category}
+                            pictureId={picture._id}
+                            headline={picture.headline}
+                            url={picture.url}
+                            owner={picture._ownerId}
+                            currentUser={userId}
+                            username={username}
+                            token={token}
+                            deletePicutre={deleteButtonHandler}
+                        />
+                    ))
+                ) : (
+                    <div className={styles["missing-content"]}>
+                        <p className={styles["missing-content-msg"]}>
+                            There are no pictures in this category yet!
+                        </p>
+                    </div>
+                )}
+            </div>
+            <div className={styles["pagination-container"]}>
+                <Pagination
+                    picsPerPage={picsPerPage}
+                    totalPics={pictures.length}
+                    paginate={paginate}
+                />
+            </div>
+        </>
     );
 }
