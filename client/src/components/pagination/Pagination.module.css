@@ -1,0 +1,19 @@
+.pagination {
+    font-size: x-large;
+    font-family: "Raleway", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1440px;
+    align-items: center;
+}
+
+.page-item {
+    align-items: center;
+    color: black;
+    padding: 8px 16px;
+    list-style-type: none;
+}
+.page-link {
+    text-decoration: none;
+}
