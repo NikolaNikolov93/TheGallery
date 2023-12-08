@@ -74,9 +74,7 @@ export default function PictureWrapper({
             <div
                 className={styles["img"]}
                 style={{ backgroundImage: `url(${url})` }}
-            >
-                {isLoggedIn && <></>}
-            </div>
+            ></div>
             {isLoggedIn && (
                 <>
                     <div className={styles["buttonsWrapper"]}>
@@ -113,10 +111,7 @@ export default function PictureWrapper({
                         {isOwner && (
                             <>
                                 <Link to={`/${category}/${pictureId}/edit`}>
-                                    <button
-                                        className={styles["editButton"]}
-                                        // onClick={() => console.log(pictureId)}
-                                    >
+                                    <button className={styles["editButton"]}>
                                         Edit
                                     </button>
                                 </Link>

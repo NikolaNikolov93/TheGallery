@@ -52,7 +52,10 @@ export default function InsideSingleCategory() {
     const indexOfFirstPic = indexOfLastPic - picsPerPage;
     const currentPics = pictures.slice(indexOfFirstPic, indexOfLastPic);
     //Change page
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    const paginate = (pageNumber, e) => {
+        console.log(e.target.className);
+        setCurrentPage(pageNumber);
+    };
     return (
         <>
             <div className={styles.container}>
@@ -84,6 +87,7 @@ export default function InsideSingleCategory() {
                     picsPerPage={picsPerPage}
                     totalPics={pictures.length}
                     paginate={paginate}
+                    currentPage={currentPage}
                 />
             </div>
         </>
