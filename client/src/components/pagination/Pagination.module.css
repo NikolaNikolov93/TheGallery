@@ -8,6 +8,7 @@
     list-style: none;
     margin: 0;
     padding: 0;
+    background-color: rgb(185, 185, 185);
 }
 
 .page-item {
@@ -16,6 +17,7 @@
     padding: 8px 5px;
 }
 .pagination .page-link {
+    color: white;
     padding: 5px 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
