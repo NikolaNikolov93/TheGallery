@@ -12,6 +12,7 @@ import Top10 from "./components/top10/Top10";
 import CreatePicture from "./components/createPicture/CreatePicture";
 import Details from "./components/details/Details";
 import Edit from "./components/edit/Edit";
+import AuthGuard from "./components/guards/AuthGuard";
 
 function App() {
     return (
@@ -23,22 +24,26 @@ function App() {
                         <Routes>
                             <Route path="/" element={<Categories />} />
                             <Route path="/top10" element={<Top10 />} />
-                            <Route
-                                path="/create-image"
-                                element={<CreatePicture />}
-                            />
+
                             <Route
                                 path="/:category"
                                 element={<InsideSingleCategory />}
                             />
-                            <Route
-                                path="/:category/:pictureId/details"
-                                element={<Details />}
-                            />
-                            <Route
-                                path="/:category/:pictureId/edit"
-                                element={<Edit />}
-                            />
+
+                            <Route element={<AuthGuard />}>
+                                <Route
+                                    path="/create-image"
+                                    element={<CreatePicture />}
+                                />
+                                <Route
+                                    path="/:category/:pictureId/edit"
+                                    element={<Edit />}
+                                />
+                                <Route
+                                    path="/:category/:pictureId/details"
+                                    element={<Details />}
+                                />
+                            </Route>
                             <Route path="*" element={<NotFound />} />
                         </Routes>
                     </main>
