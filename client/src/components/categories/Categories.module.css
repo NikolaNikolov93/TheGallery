@@ -7,3 +7,20 @@
     max-width: 1440px;
     margin: 0 auto;
 }
+.search-container {
+    font-family: "Raleway", sans-serif;
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: 20px auto;
+}
+.search-container input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+}
+.search-container p {
+    font-size: x-large;
+    text-align: center;
+}
