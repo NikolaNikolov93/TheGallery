@@ -75,7 +75,7 @@ export default function formValidator(inputValues) {
                     validationResult.errorMessage =
                         "Password field cannot be empty!";
                 }
-                if (password.length < 5) {
+                if (password.length < 5 && password != "") {
                     validationResult.isValid = false;
                     validationResult.errorMessage =
                         "Password must contain atleast 5 charactes!";
