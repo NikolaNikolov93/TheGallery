@@ -4,9 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 
-import Path from "../../paths";
 import * as likeServices from "../../services/likesServices";
-import * as pictureServices from "../../services/pictureServices";
 
 export default function PictureWrapper({
     category,
