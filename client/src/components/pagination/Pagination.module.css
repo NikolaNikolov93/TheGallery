@@ -5,15 +5,26 @@
     justify-content: center;
     align-items: center;
     max-width: 1440px;
-    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .page-item {
     align-items: center;
     color: black;
-    padding: 8px 16px;
-    list-style-type: none;
+    padding: 8px 5px;
 }
-.page-link {
+.pagination .page-link {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
     text-decoration: none;
+}
+.pagination .active {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    text-decoration: none;
+    background-color: rgb(255, 255, 255);
 }
