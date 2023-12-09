@@ -24,3 +24,7 @@
     font-size: x-large;
     text-align: center;
 }
+.missing-category {
+    text-align: center;
+    font-family: "Raleway", sans-serif;
+}

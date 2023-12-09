@@ -1,30 +1,35 @@
 import styles from "./Categories.module.css";
+import CategoriesContext from "../contexts/categoriesContext";
+
 import { useContext, useEffect, useState } from "react";
 
 import DividerCategoryLine from "../divider/DividerCategoryLine";
 import SingleCategory from "../single-category/SingleCategory";
 
-import CategoriesContext from "../contexts/categoriesContext";
-
 export default function Categories() {
     const { categories } = useContext(CategoriesContext);
+
+    // Filter by categoeries setup
     const [value, setValue] = useState("");
     const [filteredCategories, setFilteredCategories] = useState([]);
 
+    /** UseEffect is triggered each time there is a change in the search bar which rerenders the element
+     * and filter only the elements which include the text from the search bar
+     */
     useEffect(() => {
         setFilteredCategories(categories);
     }, [categories]);
 
+    /**Search bar  Onchange handler */
     const onChangeHandler = (e) => {
         const text = e.target.value.trim();
         if (text === "") {
             setValue(e.target.value);
             setFilteredCategories(categories);
+
             return;
         } else {
             setValue(text);
-            console.log(text);
-
             let newArr = [];
             categories.forEach((category) => {
                 if (category.description.includes(text)) {
@@ -48,16 +53,21 @@ export default function Categories() {
                     value={value}
                 />
             </div>
-
-            <section className={styles.categoriesContainer}>
-                {filteredCategories.map((category, index) => (
-                    <SingleCategory
-                        key={category._id}
-                        url={category.url}
-                        description={category.description}
-                    />
-                ))}
-            </section>
+            {filteredCategories.length <= 0 ? (
+                <h1 className={styles["missing-category"]}>
+                    There are no categories matching your search!
+                </h1>
+            ) : (
+                <section className={styles.categoriesContainer}>
+                    {filteredCategories.map((category, index) => (
+                        <SingleCategory
+                            key={category._id}
+                            url={category.url}
+                            description={category.description}
+                        />
+                    ))}
+                </section>
+            )}
         </>
     );
 }
