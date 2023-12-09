@@ -48,12 +48,12 @@ export default function InsideSingleCategory() {
             console.log("User canceled");
         }
     };
+    /**Paginaton items per page setup */
     const indexOfLastPic = currentPage * picsPerPage;
     const indexOfFirstPic = indexOfLastPic - picsPerPage;
     const currentPics = pictures.slice(indexOfFirstPic, indexOfLastPic);
     //Change page
     const paginate = (pageNumber, e) => {
-        console.log(e.target.className);
         setCurrentPage(pageNumber);
     };
     return (

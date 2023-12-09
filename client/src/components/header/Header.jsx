@@ -1,7 +1,10 @@
 import styles from "./Header.module.css";
+
 import { Link } from "react-router-dom";
-import logo from "../../assets/images/TheGalleryLogo.png";
 import React, { useContext } from "react";
+
+import logo from "../../assets/images/TheGalleryLogo.png";
+
 import Login from "../login/Login";
 import Register from "../register/Register";
 import AuthContext from "../contexts/authContext";
@@ -17,7 +20,6 @@ export default function Header() {
         logoutHandler,
         isAuthenticated,
         username,
-        email,
         token,
     } = useContext(AuthContext);
 

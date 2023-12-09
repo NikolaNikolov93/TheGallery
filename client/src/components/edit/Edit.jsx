@@ -1,16 +1,22 @@
 import styles from "../../components/edit/Edit.module.css";
+
 import * as pictureServices from "../../services/pictureServices";
+
 import { useContext, useEffect, useState } from "react";
-import AuthContext from "../contexts/authContext";
 import { useNavigate, useParams } from "react-router-dom";
+
+import AuthContext from "../contexts/authContext";
 import CategoriesContext from "../contexts/categoriesContext";
+
 import useForm from "../../hooks/useFrom";
 import Path from "../../paths";
 import formValidator from "../../utils/formValidator";
 
 export default function Edit() {
+    /**Error message handling */
     const [errorMsg, setErrorMsg] = useState("");
     const [hasError, setError] = useState(false);
+    /**Setup needed data  */
     const { pictureId } = useParams();
     const { token } = useContext(AuthContext);
     const { categories } = useContext(CategoriesContext);
@@ -20,7 +26,10 @@ export default function Edit() {
         category: "",
         description: "",
     });
+
     const navigate = useNavigate();
+
+    /** Error message and flag cleanup function */
     const errorCleanup = () => {
         setError(false);
         setErrorMsg("");
@@ -31,6 +40,7 @@ export default function Edit() {
             setPictureData(result);
         });
     }, [pictureId]);
+
     const editPictureSubmitHandler = async (values) => {
         const validationResult = formValidator(values);
         if (!validationResult.isValid) {
@@ -42,6 +52,7 @@ export default function Edit() {
         await pictureServices.edit(values, pictureId, token);
         navigate(Path[values.category.toLowerCase().replace(" ", "-")]);
     };
+
     const { values, onChange, onSubmit } = useForm(
         editPictureSubmitHandler,
         pictureData,

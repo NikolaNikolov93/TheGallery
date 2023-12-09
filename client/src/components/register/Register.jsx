@@ -9,6 +9,8 @@ export default function Register() {
         Repass: "repeat-password",
         Username: "username",
     };
+
+    /**States and error handling are managed by authContext */
     const {
         openLoginModal,
         closeRegisterModal,
@@ -17,6 +19,10 @@ export default function Register() {
         errorMsg,
         errorCleanup,
     } = useContext(AuthContext);
+
+    /**useMemo is used to avoid infinite loops in the component
+     * by refereing to the same object in memory instead of making new one
+     */
     const initialValues = useMemo(
         () => ({
             [RegisterFormKeys.Email]: "",
@@ -26,15 +32,21 @@ export default function Register() {
         }),
         []
     );
+
+    /**Custom form handler */
     const { values, onChange, onSubmit } = useForm(
         registerSubmitHandler,
         initialValues,
         errorCleanup
     );
+
+    /**Callback function for relocating  */
     const relocate = () => {
         closeRegisterModal();
         openLoginModal();
     };
+
+    /**Callback function for closing the modal on Escabe kyeboard button click */
     const closeOnEscapeKey = (target) => {
         if (target.code === "Escape") {
             closeRegisterModal();
@@ -42,6 +54,8 @@ export default function Register() {
         }
         return;
     };
+
+    /**Callback function for closing the modal onClick outside of the form */
     const closeOnBackdropClick = (event) => {
         const backDropElement = document.getElementById("registerBackDrop");
         if (event.target.className === backDropElement.className) {

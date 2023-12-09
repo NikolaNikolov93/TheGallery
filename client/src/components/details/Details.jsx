@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
-import styles from "../../components/details/Details.module.css";
 import { Link, useParams } from "react-router-dom";
-import * as pictureServices from "../../services/pictureServices";
+
+import styles from "../../components/details/Details.module.css";
 import NotFound from "../notFound/NotFound";
+
+import * as pictureServices from "../../services/pictureServices";
+/**transformTimeStamp is a function that trnasforms the server date to human readable data */
 import transformTimestamp from "../../utils/transformTimestamp";
 
 export default function Details() {
@@ -14,6 +17,7 @@ export default function Details() {
             .getOne(pictureId)
             .then((pictureData) => setPictureData(pictureData));
     }, []);
+
     const uploadedDate = transformTimestamp(pictureData._createdOn);
 
     return pictureData.code === 404 ? (

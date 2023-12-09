@@ -1,28 +1,36 @@
 import { useContext, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import styles from ".././createPicture/CreatePicture.module.css";
 import AuthContext from "../contexts/authContext";
-import useForm from "../../hooks/useFrom";
-import * as pictureServices from "../../services/pictureServices";
 import CategoriesContext from "../contexts/categoriesContext";
-import { useNavigate } from "react-router-dom";
-import Path from "../../paths";
+
+import * as pictureServices from "../../services/pictureServices";
+
+import useForm from "../../hooks/useFrom";
 import formValidator from "../../utils/formValidator";
+import Path from "../../paths";
 
 export default function CreatePicture() {
+    /**Error message handling using custom validator function to sanitize the code and transfer error messages */
     const [errorMsg, setErrorMsg] = useState("");
     const [hasError, setError] = useState(false);
+
     const { username, email } = useContext(AuthContext);
     const navigate = useNavigate();
+
     const CreatePicutreFormKeys = {
         Headline: "headline",
         URL: "url",
         Description: "description",
         Category: "category",
     };
+
     const errorCleanup = () => {
         setError(false);
         setErrorMsg("");
     };
+
     const createPictureSubmitHandler = async (values) => {
         const validationResult = formValidator(values);
         if (!validationResult.isValid) {
@@ -43,8 +51,10 @@ export default function CreatePicture() {
             console.log(error);
         }
     };
+
     const { token } = useContext(AuthContext);
     const { categories } = useContext(CategoriesContext);
+
     const initialValues = useMemo(
         () => ({
             [CreatePicutreFormKeys.Headline]: "",
@@ -54,6 +64,7 @@ export default function CreatePicture() {
         }),
         []
     );
+    /** Custom hook for Form handling */
     const { values, onChange, onSubmit } = useForm(
         createPictureSubmitHandler,
         initialValues,

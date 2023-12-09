@@ -42,6 +42,7 @@ export const create = async (values, token) => {
     const result = await response.json();
     return result;
 };
+
 export const edit = async (values, pictureId, token) => {
     const body = {
         username: values.username,
@@ -63,6 +64,7 @@ export const edit = async (values, pictureId, token) => {
     const result = await response.json();
     return result;
 };
+
 export const remove = async (pictureId, token) => {
     const settings = {
         method: "DELETE",

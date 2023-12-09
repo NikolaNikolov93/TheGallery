@@ -28,6 +28,7 @@ export const addLike = async (pictureId, userID, username, token) => {
     const result = await response.json();
     return result;
 };
+
 export const removeLike = async (likeID, token) => {
     const settings = {
         method: "DELETE",
@@ -40,6 +41,7 @@ export const removeLike = async (likeID, token) => {
     const result = await response.json();
     return result;
 };
+
 export const getAll = async () => {
     const response = await fetch(baseUrl);
     const result = await response.json();

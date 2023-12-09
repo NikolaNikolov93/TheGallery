@@ -12,10 +12,11 @@ const AuthContext = createContext();
 AuthContext.displayName = "AuthContext";
 
 export const AuthProvider = ({ children }) => {
+    /**Error handling setup used to transfer the errorMessage from the server to the components for better UX */
     const [errorMsg, setErrorMsg] = useState("");
     const [hasError, setError] = useState(false);
     const navigate = useNavigate();
-
+    /** Function that is called onChage in order to clean the error message from the Form */
     const errorCleanup = () => {
         setError(false);
         setErrorMsg("");
@@ -24,11 +25,12 @@ export const AuthProvider = ({ children }) => {
     /**Authentication state */
     const [auth, setAuth] = usePeristedState("auth", {});
 
-    /** Lifted state for the Login From */
+    /**Login modal form handling */
     const [showLogin, setShowLogin] =
         usePeristedState(
             false
-        ); /** usePersistedState is custom hook for persisting the state in the localStorage */
+        ); /**usePersistedState is custom hook for state persistance in the broweser */
+
     const closeLoginModal = () => {
         setShowLogin(false);
         errorCleanup();
@@ -58,7 +60,7 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    /** Lifted state for the Register From */
+    /** Register modal from handling */
     const [showRegister, setShowRegister] = useState(false);
     const closeRegisterModal = () => {
         setShowRegister(false);
@@ -91,7 +93,7 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    /**Logout handler */
+    /**Logout handling */
     const logoutHandler = async (token) => {
         await authService.logout(token);
         setAuth({});
@@ -99,7 +101,7 @@ export const AuthProvider = ({ children }) => {
         navigate(Path.home);
     };
 
-    /**Authentication values object */
+    /**Authentication values object is used to transfer the data needed for other components */
     const authenticationContextData = {
         loginSubmitHandler,
         closeLoginModal,

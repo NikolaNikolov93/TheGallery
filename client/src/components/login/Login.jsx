@@ -1,7 +1,10 @@
-import useForm from "../../hooks/useFrom";
-import React, { useContext, useMemo } from "react";
 import styles from "../login/Login.module.css";
+
+import React, { useContext, useMemo } from "react";
+
 import AuthContext from "../contexts/authContext";
+
+import useForm from "../../hooks/useFrom";
 
 const LoginFromKeys = {
     Email: "email",
@@ -9,6 +12,7 @@ const LoginFromKeys = {
 };
 
 export default function Login() {
+    /**States and eror handling are managed in authContext */
     const {
         loginSubmitHandler,
         closeLoginModal,
@@ -17,6 +21,10 @@ export default function Login() {
         errorMsg,
         errorCleanup,
     } = useContext(AuthContext);
+
+    /**useMemo is used to avoid infinite loops in the components
+     * With this initial values setup we refer to the same object instead of making new one
+     */
     const initialValues = useMemo(
         () => ({
             [LoginFromKeys.Email]: "",
@@ -24,15 +32,20 @@ export default function Login() {
         }),
         []
     );
+
     const { values, onChange, onSubmit } = useForm(
         loginSubmitHandler,
         initialValues,
         errorCleanup
     );
+
+    /**Callback function for relocation*/
     const relocate = () => {
         closeLoginModal();
         openRegisterModal();
     };
+
+    /**Callback function for closing the modal on Escape keyboard button click */
     const closeOnEscapeKey = (target) => {
         if (target.code === "Escape") {
             closeLoginModal();
@@ -40,6 +53,8 @@ export default function Login() {
         }
         return;
     };
+
+    /**Callback function for closing the modal onClick outside the form */
     const closeOnBackdropClick = (event) => {
         const backDropElement = document.getElementById("loginBackDrop");
         if (event.target.className === backDropElement.className) {
@@ -48,6 +63,7 @@ export default function Login() {
         }
         return;
     };
+
     return (
         <div onKeyDown={closeOnEscapeKey}>
             <div
