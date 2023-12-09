@@ -18,10 +18,12 @@
 }
 
 .detailsSection {
+    box-shadow: 0 0 4px 6px #cccd;
+    padding: 10px;
     font-size: xx-large;
     text-align: left;
     width: 950px;
-    height: auto;
+    height: 700px;
     flex-direction: column;
     background-color: rgb(255, 255, 255);
 }
