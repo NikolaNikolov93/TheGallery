@@ -75,7 +75,7 @@ export default function CreatePicture() {
         <>
             <div className={styles["container"]}>
                 <div className={styles["container-content"]}>
-                    <h2>Add Image</h2>
+                    <p className={styles["headline"]}>Add Image</p>
                     {hasError && (
                         <>
                             <p className={styles["errorMsg"]}>{errorMsg}</p>
